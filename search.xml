@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Git</title>
+    <url>/2020/05/30/Git/</url>
+    <content><![CDATA[<h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><h3 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;用户名&quot;</span><br><span class="line">git config --global user.email &quot;邮箱名&quot;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd 到你想要去的文件夹下 如：cd www</span><br><span class="line">用 mkdir 创建文件夹: 如 mkdir testgit</span><br><span class="line">再用cd去到刚刚新建的文件夹下 :如 cd testgit</span><br><span class="line">用pwd查看本来目录 ：如 pwd</span><br><span class="line"></span><br><span class="line">通过git init把这个目录变成git可以管理的仓库 ：如 git init</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">首先在版本库目录中创建一个记事本，并写上内容 ：如  read.txt ,内容 111</span><br><span class="line">使用git add 文件名 添加到暂存区 ：如git add read.txt</span><br><span class="line">使用 git commit告诉git把文件添加到创库,-m表示你想描述的内容 ：如 git commit -m &quot;&quot;  </span><br><span class="line">查看是否还有文件未提交： git status</span><br><span class="line">查看文件改变了什么内容： git diff read.txt(文件名)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查看历史记录：git log</span><br><span class="line">查看少量记录：git log --pretty&#x3D;oneline</span><br><span class="line">回退到上一个版本：git reset--hard HEAD^</span><br><span class="line">回退到上上一个版本：git reset--hard HEAD^^</span><br><span class="line">回退到第一百个版本：git reset--hard HEAD~100</span><br><span class="line">查看信息：cat read.txt</span><br><span class="line">获取版本号：git reflog</span><br><span class="line">回退到最新版本（或指定版本）：git reset --rd 版本号</span><br><span class="line">追加信息：echo &quot;内容&quot; &gt;&gt; 文件名</span><br><span class="line">清空信息：clear</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、在目录下创建一个base.txt并添加一些内容，用git status查看有一个暂存文件</span><br><span class="line">2、用git add base.txt命令后没有站存文件,用git commit -m命令提交</span><br><span class="line">3、在base.txt里新增一些内容,用git status查看有一个未站存文件</span><br><span class="line">4、用git add base.txt后，再用git status 查看没有站存文件</span><br><span class="line">5、问题：此时想把3中新增的文件删除怎么办，也就是添加到站存区但是还没有用commit提交</span><br><span class="line">6、用git reset HEAD base.txt即可，此时再去看已经删除3中新增的内容</span><br><span class="line">7、但是用git status查看3中新增内容在站存区还有，用git checkout -- base.txt即可清除</span><br><span class="line">8、此时又新增一个内容，用git status查看有一个站存文件</span><br><span class="line">9、用git add base.txt添加到站存中，再用git commit -m提交完成</span><br><span class="line">10、问题：想把8中新增的内容删除应该如何做，也就是以添加到站存区和已经用commit提交了</span><br><span class="line">11、首先用git log命令查看版本号，再用git reset --hard 版本号 即可</span><br><span class="line">12、问题：想把整个base.txt删除如何做</span><br><span class="line">13、用 git rm base.txt即可删除，此时文件已经不存在硬盘上</span><br><span class="line">14、但是用git status 查看还存在站存区中，用git commit -m提交之后就可以了</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="克隆创库：克隆远程创库的信息到本地创库"><a href="#克隆创库：克隆远程创库的信息到本地创库" class="headerlink" title="克隆创库：克隆远程创库的信息到本地创库"></a>克隆创库：克隆远程创库的信息到本地创库</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">命令：git clone git@github.com:stylerdemo&#x2F;demo4.git</span><br><span class="line">步奏：</span><br><span class="line">1、打开github，新建一个远程创库，起一个名字，确定</span><br><span class="line">2、用ls -a检查本地是否已新建有创库，如没有则可以新建，复制里面的地址，到git里面用git clone 地址。</span><br><span class="line">3、cd到对应的目录下，用git status查看是否新建成功</span><br><span class="line">4、在里面新建一个文本，并添加一些内容，如： echo &quot;内容&quot; &gt;&gt; 文本文件，用 cat 文本文件 查看内容</span><br><span class="line">4-1、向文本里添加内容，如：echo &quot;123&quot; text</span><br><span class="line">5、用git status查看没有追踪到，需要用命令 git add 文本文件，git commit -m 提交到本地创库</span><br><span class="line">6、通过 git push提交回远程创库</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="标签管理：每更换一个版本，都用一个标签来对应"><a href="#标签管理：每更换一个版本，都用一个标签来对应" class="headerlink" title="标签管理：每更换一个版本，都用一个标签来对应"></a>标签管理：每更换一个版本，都用一个标签来对应</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">查看所有标签：git tag</span><br><span class="line">创建标签： git tag name</span><br><span class="line">指定提交信息： git tag -a name -m &quot;comment&quot;</span><br><span class="line">删除标签： git tag -d name</span><br><span class="line">标签发布： git push origin name</span><br><span class="line"></span><br><span class="line">步奏：</span><br><span class="line">1、已经有一个文件关联到github上，里面有个text文本</span><br><span class="line">2、新增一些内容到text上，如：echo &quot;123&quot; &gt;&gt; text</span><br><span class="line">3、把text添加到暂存区git add text,再放到本地创库git commit -m</span><br><span class="line">4、用git status查看成功之后，用git push 添加到远程创库</span><br><span class="line">5、用git tag查看有没有标签，没有用 git tag 标签名 来创建标签，再用git tag查看标签是否存在</span><br><span class="line">6、再用 git push origin 标签名 命令来发布到远程创库,去到github相应的地方即可查看到</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="分支管理：可以在原来的分支里创建自己的分支，而且互不影响，还可以合并"><a href="#分支管理：可以在原来的分支里创建自己的分支，而且互不影响，还可以合并" class="headerlink" title="分支管理：可以在原来的分支里创建自己的分支，而且互不影响，还可以合并"></a>分支管理：可以在原来的分支里创建自己的分支，而且互不影响，还可以合并</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">步奏：</span><br><span class="line">1、新建一个本地目录，里面有一个branck.txt,如：branck-demo,用ls -a查看有没有本地仓库也就是.git文件，</span><br><span class="line">2、用git init 初始化仓库，为branck.txt添加内容，如：echo &quot;111&quot; &gt;&gt; branck.txt</span><br><span class="line">3、把文件添加到暂存区里 git add branck.txt,再添加到本地仓库，git commit -m,再用git status查看状态</span><br><span class="line">4、新建一个分支，git branck featrue_x,通过git branck查看所有分支，*表示在哪个分支上</span><br><span class="line">5、切换到featrue_x分支上：git checkout featrue_x,再用git branck查看在哪个分支上</span><br><span class="line">6、用featrue_x分支在branck.txt上添加多一条内容，如：echo &#39;222&#39; &gt;&gt; branck.txt</span><br><span class="line">7、把文件添加到暂存区里 git add branck.txt,再添加到本地仓库，git commit -m,再用git status查看状态</span><br><span class="line">8、如想合并分支，先切换到master,如：git checkout master</span><br><span class="line">9、合并分支，git merge featrue_x,用cat branck.txt命令查看内容是否成功</span><br><span class="line">10、删除分支：git branck -d featrue_x,再用git branck查看是否删除成功</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/05/30/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>jquery</title>
+    <url>/2020/05/30/jquery/</url>
+    <content><![CDATA[<h1 id="jquery"><a href="#jquery" class="headerlink" title="jquery"></a>jquery</h1><h1 id="jQuery-教程"><a href="#jQuery-教程" class="headerlink" title="jQuery 教程"></a>jQuery 教程</h1><p>jQuery 语法是为 HTML 元素的选取编制的，可以对元素执行某些操作。</p>
+<p>基础语法是：<em>$(selector).action()</em></p>
+<ul>
+<li>美元符号定义 jQuery</li>
+<li>选择符（selector）“查询”和“查找” HTML 元素</li>
+<li>jQuery 的 action() 执行对元素的操作</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="文档就绪函数"><a href="#文档就绪函数" class="headerlink" title="文档就绪函数"></a>文档就绪函数</h3><p>您也许已经注意到在我们的实例中的所有 jQuery 函数位于一个 document ready 函数中：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$(document).ready(function()&#123;</span><br><span class="line"></span><br><span class="line">--- jQuery functions go here ----</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="jQuery-选择器"><a href="#jQuery-选择器" class="headerlink" title="jQuery 选择器"></a>jQuery 选择器</h1><h3 id="jQuery-选择器-1"><a href="#jQuery-选择器-1" class="headerlink" title="jQuery 选择器"></a>jQuery 选择器</h3><p>在前面的章节中，我们展示了一些有关如何选取 HTML 元素的实例。</p>
+<p>关键点是学习 jQuery 选择器是如何准确地选取您希望应用效果的元素。</p>
+<p>jQuery 元素选择器和属性选择器允许您通过标签名、属性名或内容对 HTML 元素进行选择。</p>
+<p>选择器允许您对 HTML 元素组或单个元素进行操作。</p>
+<p>在 HTML DOM 术语中：</p>
+<p>选择器允许您对 DOM 元素组或单个 DOM 节点进行操作。</p>
+<h3 id="jQuery-元素选择器"><a href="#jQuery-元素选择器" class="headerlink" title="jQuery 元素选择器"></a>jQuery 元素选择器</h3><p>jQuery 使用 CSS 选择器来选取 HTML 元素。</p>
+<p>$(“p”) 选取 <p> 元素。</p>
+<p>$(“p.intro”) 选取所有 class=”intro” 的 <p> 元素。</p>
+<p>$(“p#demo”) 选取所有 id=”demo” 的 <p> 元素。</p>
+<h3 id="jQuery-属性选择器"><a href="#jQuery-属性选择器" class="headerlink" title="jQuery 属性选择器"></a>jQuery 属性选择器</h3><p>jQuery 使用 XPath 表达式来选择带有给定属性的元素。</p>
+<p>$(“[href]”) 选取所有带有 href 属性的元素。</p>
+<p>$(“[href=’#’]”) 选取所有带有 href 值等于 “#” 的元素。</p>
+<p>$(“[href!=’#’]”) 选取所有带有 href 值不等于 “#” 的元素。</p>
+<p>$(“[href$=’.jpg’]”) 选取所有 href 值以 “.jpg” 结尾的元素。</p>
+<h3 id="jQuery-CSS-选择器"><a href="#jQuery-CSS-选择器" class="headerlink" title="jQuery CSS 选择器"></a>jQuery CSS 选择器</h3><p>jQuery CSS 选择器可用于改变 HTML 元素的 CSS 属性。</p>
+<h1 id="jQuery-事件"><a href="#jQuery-事件" class="headerlink" title="jQuery 事件"></a>jQuery 事件</h1><h2 id="jQuery-事件函数"><a href="#jQuery-事件函数" class="headerlink" title="jQuery 事件函数"></a>jQuery 事件函数</h2><p>jQuery 事件处理方法是 jQuery 中的核心函数。</p>
+<p>事件处理程序指的是当 HTML 中发生某些事件时所调用的方法。术语由事件“触发”（或“激发”）经常会被使用。</p>
+<p>通常会把 jQuery 代码放到 <head>部分的事件处理方法中：</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;jquery.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;button&quot;).click(function()&#123;</span><br><span class="line">    $(&quot;p&quot;).hide();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h2&gt;This is a heading&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;p&gt;This is a paragraph.&lt;&#x2F;p&gt;</span><br><span class="line">&lt;p&gt;This is another paragraph.&lt;&#x2F;p&gt;</span><br><span class="line">&lt;button&gt;Click me&lt;&#x2F;button&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h2 id="jQuery-效果"><a href="#jQuery-效果" class="headerlink" title="jQuery 效果"></a>jQuery 效果</h2><h3 id="jQuery-效果-隐藏：hide-、和显示：show-、和切换：toggle"><a href="#jQuery-效果-隐藏：hide-、和显示：show-、和切换：toggle" class="headerlink" title="jQuery 效果 - 隐藏：hide()、和显示：show()、和切换：toggle()"></a>jQuery 效果 - 隐藏：hide()、和显示：show()、和切换：toggle()</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#x2F;jquery&#x2F;jquery-1.11.1.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;#hide&quot;).click(function()&#123;</span><br><span class="line">  $(&quot;p&quot;).hide();</span><br><span class="line">  &#125;);</span><br><span class="line">  $(&quot;#show&quot;).click(function()&#123;</span><br><span class="line">  $(&quot;p&quot;).show();</span><br><span class="line">  &#125;);</span><br><span class="line">   $(&quot;#toggle&quot;).click(function()&#123;</span><br><span class="line">  $(&quot;p&quot;).toggle();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p id&#x3D;&quot;p1&quot;&gt;如果点击“隐藏”按钮，我就会消失。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;button id&#x3D;&quot;hide&quot; type&#x3D;&quot;button&quot;&gt;隐藏&lt;&#x2F;button&gt;</span><br><span class="line">&lt;button id&#x3D;&quot;show&quot; type&#x3D;&quot;button&quot;&gt;显示&lt;&#x2F;button&gt;</span><br><span class="line">&lt;button id&#x3D;&quot;toggle&quot; type&#x3D;&quot;button&quot;&gt;切换&lt;&#x2F;button&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="jQuery-效果-淡入淡出"><a href="#jQuery-效果-淡入淡出" class="headerlink" title="jQuery 效果 - 淡入淡出"></a>jQuery 效果 - 淡入淡出</h1><h4 id="fadeIn-用于淡入已隐藏的元素。"><a href="#fadeIn-用于淡入已隐藏的元素。" class="headerlink" title="fadeIn() 用于淡入已隐藏的元素。"></a>fadeIn() 用于淡入已隐藏的元素。</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#x2F;jquery&#x2F;jquery-1.11.1.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;button&quot;).click(function()&#123;</span><br><span class="line">    $(&quot;#div1&quot;).fadeIn();</span><br><span class="line">    $(&quot;#div2&quot;).fadeIn(&quot;slow&quot;);</span><br><span class="line">    $(&quot;#div3&quot;).fadeIn(3000);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p&gt;演示带有不同参数的 fadeIn() 方法。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;button&gt;点击这里，使三个矩形淡入&lt;&#x2F;button&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;div1&quot; style&#x3D;&quot;width:80px;height:80px;display:none;background-color:red;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;div2&quot; style&#x3D;&quot;width:80px;height:80px;display:none;background-color:green;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;div3&quot; style&#x3D;&quot;width:80px;height:80px;display:none;background-color:blue;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="fadeOut-方法用于淡出可见元素。"><a href="#fadeOut-方法用于淡出可见元素。" class="headerlink" title="fadeOut() 方法用于淡出可见元素。"></a>fadeOut() 方法用于淡出可见元素。</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#x2F;jquery&#x2F;jquery-1.11.1.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;button&quot;).click(function()&#123;</span><br><span class="line">    $(&quot;#div1&quot;).fadeOut();</span><br><span class="line">    $(&quot;#div2&quot;).fadeOut(&quot;slow&quot;);</span><br><span class="line">    $(&quot;#div3&quot;).fadeOut(3000);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p&gt;演示带有不同参数的 fadeOut() 方法。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;button&gt;点击这里，使三个矩形淡出&lt;&#x2F;button&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;div1&quot; style&#x3D;&quot;width:80px;height:80px;background-color:red;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;div2&quot; style&#x3D;&quot;width:80px;height:80px;background-color:green;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;div3&quot; style&#x3D;&quot;width:80px;height:80px;background-color:blue;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="fadeToggle-方法可以在-fadeIn-与-fadeOut-方法之间进行切换。"><a href="#fadeToggle-方法可以在-fadeIn-与-fadeOut-方法之间进行切换。" class="headerlink" title="fadeToggle() 方法可以在 fadeIn() 与 fadeOut() 方法之间进行切换。"></a>fadeToggle() 方法可以在 fadeIn() 与 fadeOut() 方法之间进行切换。</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#x2F;jquery&#x2F;jquery-1.11.1.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;button&quot;).click(function()&#123;</span><br><span class="line">    $(&quot;#div1&quot;).fadeToggle();</span><br><span class="line">    $(&quot;#div2&quot;).fadeToggle(&quot;slow&quot;);</span><br><span class="line">    $(&quot;#div3&quot;).fadeToggle(3000);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;演示带有不同参数的 fadeToggle() 方法。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;button&gt;点击这里，使三个矩形淡入淡出&lt;&#x2F;button&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;div1&quot; style&#x3D;&quot;width:80px;height:80px;background-color:red;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;div2&quot; style&#x3D;&quot;width:80px;height:80px;background-color:green;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;div3&quot; style&#x3D;&quot;width:80px;height:80px;background-color:blue;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="fadeTo-方法允许渐变为给定的不透明度（值介于-0-与-1-之间）。"><a href="#fadeTo-方法允许渐变为给定的不透明度（值介于-0-与-1-之间）。" class="headerlink" title="fadeTo() 方法允许渐变为给定的不透明度（值介于 0 与 1 之间）。"></a>fadeTo() 方法允许渐变为给定的不透明度（值介于 0 与 1 之间）。</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#x2F;jquery&#x2F;jquery-1.11.1.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;button&quot;).click(function()&#123;</span><br><span class="line">    $(&quot;#div1&quot;).fadeTo(&quot;slow&quot;,0.15);</span><br><span class="line">    $(&quot;#div2&quot;).fadeTo(&quot;slow&quot;,0.4);</span><br><span class="line">    $(&quot;#div3&quot;).fadeTo(&quot;slow&quot;,0.7);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;演示带有不同参数的 fadeTo() 方法。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;button&gt;点击这里，使三个矩形淡出&lt;&#x2F;button&gt;</span><br><span class="line">&lt;br&gt;&lt;br&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;div1&quot; style&#x3D;&quot;width:80px;height:80px;background-color:red;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;div2&quot; style&#x3D;&quot;width:80px;height:80px;background-color:green;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;div3&quot; style&#x3D;&quot;width:80px;height:80px;background-color:blue;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="jQuery-效果-滑动"><a href="#jQuery-效果-滑动" class="headerlink" title="jQuery 效果 - 滑动"></a>jQuery 效果 - 滑动</h1><h4 id="slideDown-方法用于向下滑动元素。"><a href="#slideDown-方法用于向下滑动元素。" class="headerlink" title="slideDown() 方法用于向下滑动元素。"></a>slideDown() 方法用于向下滑动元素。</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#x2F;jquery&#x2F;jquery-1.11.1.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt; </span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;.flip&quot;).click(function()&#123;</span><br><span class="line">    $(&quot;.panel&quot;).slideDown(&quot;slow&quot;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt; </span><br><span class="line">div.panel,p.flip</span><br><span class="line">&#123;</span><br><span class="line">margin:0px;</span><br><span class="line">padding:5px;</span><br><span class="line">text-align:center;</span><br><span class="line">background:#e5eecc;</span><br><span class="line">border:solid 1px #c3c3c3;</span><br><span class="line">&#125;</span><br><span class="line">div.panel</span><br><span class="line">&#123;</span><br><span class="line">height:120px;</span><br><span class="line">display:none;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"> </span><br><span class="line">&lt;body&gt;</span><br><span class="line"> </span><br><span class="line">&lt;div class&#x3D;&quot;panel&quot;&gt;</span><br><span class="line">&lt;p&gt;W3School - 领先的 Web 技术教程站点&lt;&#x2F;p&gt;</span><br><span class="line">&lt;p&gt;在 W3School，你可以找到你所需要的所有网站建设教程。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"> </span><br><span class="line">&lt;p class&#x3D;&quot;flip&quot;&gt;请点击这里&lt;&#x2F;p&gt;</span><br><span class="line"> </span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="slideUp-方法用于向上滑动元素。"><a href="#slideUp-方法用于向上滑动元素。" class="headerlink" title="slideUp() 方法用于向上滑动元素。"></a>slideUp() 方法用于向上滑动元素。</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#x2F;jquery&#x2F;jquery-1.11.1.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt; </span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;.flip&quot;).click(function()&#123;</span><br><span class="line">    $(&quot;.panel&quot;).slideUp(&quot;slow&quot;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt; </span><br><span class="line">div.panel,p.flip</span><br><span class="line">&#123;</span><br><span class="line">margin:0px;</span><br><span class="line">padding:5px;</span><br><span class="line">text-align:center;</span><br><span class="line">background:#e5eecc;</span><br><span class="line">border:solid 1px #c3c3c3;</span><br><span class="line">&#125;</span><br><span class="line">div.panel</span><br><span class="line">&#123;</span><br><span class="line">height:120px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"> </span><br><span class="line">&lt;body&gt;</span><br><span class="line"> </span><br><span class="line">&lt;div class&#x3D;&quot;panel&quot;&gt;</span><br><span class="line">&lt;p&gt;W3School - 领先的 Web 技术教程站点&lt;&#x2F;p&gt;</span><br><span class="line">&lt;p&gt;在 W3School，你可以找到你所需要的所有网站建设教程。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"> </span><br><span class="line">&lt;p class&#x3D;&quot;flip&quot;&gt;请点击这里&lt;&#x2F;p&gt;</span><br><span class="line"> </span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="slideToggle-方法可以在-slideDown-与-slideUp-方法之间进行切换。"><a href="#slideToggle-方法可以在-slideDown-与-slideUp-方法之间进行切换。" class="headerlink" title="slideToggle() 方法可以在 slideDown() 与 slideUp() 方法之间进行切换。"></a>slideToggle() 方法可以在 slideDown() 与 slideUp() 方法之间进行切换。</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">W3School TIY EditorP7</span><br><span class="line">W3School 在线教程</span><br><span class="line">改变方向</span><br><span class="line">暗黑模式</span><br><span class="line">运行代码</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#x2F;jquery&#x2F;jquery-1.11.1.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt; </span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">$(&quot;.flip&quot;).click(function()&#123;</span><br><span class="line">    $(&quot;.panel&quot;).slideToggle(&quot;slow&quot;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt; </span><br><span class="line">div.panel,p.flip</span><br><span class="line">&#123;</span><br><span class="line">margin:0px;</span><br><span class="line">padding:5px;</span><br><span class="line">text-align:center;</span><br><span class="line">background:#e5eecc;</span><br><span class="line">border:solid 1px #c3c3c3;</span><br><span class="line">&#125;</span><br><span class="line">div.panel</span><br><span class="line">&#123;</span><br><span class="line">height:120px;</span><br><span class="line">display:none;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"> </span><br><span class="line">&lt;body&gt;</span><br><span class="line"> </span><br><span class="line">&lt;div class&#x3D;&quot;panel&quot;&gt;</span><br><span class="line">&lt;p&gt;W3School - 领先的 Web 技术教程站点&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="jQuery-效果-动画"><a href="#jQuery-效果-动画" class="headerlink" title="jQuery 效果 - 动画"></a>jQuery 效果 - 动画</h1><p>jQuery animate() 方法用于创建自定义动画。</p>
+<h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$(selector).animate(&#123;params&#125;,speed,callback);</span><br></pre></td></tr></table></figure>
+
+<p>必需的 params 参数定义形成动画的 CSS 属性。</p>
+<p>可选的 speed 参数规定效果的时长。它可以取以下值：”slow”、”fast” 或毫秒。</p>
+<p>可选的 callback 参数是动画完成后所执行的函数名称。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#x2F;jquery&#x2F;jquery-1.11.1.min.js&quot;&gt;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt; </span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;button&quot;).click(function()&#123;</span><br><span class="line">    $(&quot;div&quot;).animate(&#123;</span><br><span class="line">      left:&#39;250px&#39;,</span><br><span class="line">      opacity:&#39;0.5&#39;,</span><br><span class="line">      height:&#39;150px&#39;,</span><br><span class="line">      width:&#39;150px&#39;</span><br><span class="line">    &#125;,4000,function()&#123;</span><br><span class="line">    alert(&quot;aa&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt; </span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"> </span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;button&gt;开始动画&lt;&#x2F;button&gt;</span><br><span class="line">&lt;p&gt;默认情况下，所有 HTML 元素的位置都是静态的，并且无法移动。如需对位置进行操作，记得首先把元素的 CSS position 属性设置为 relative、fixed 或 absolute。&lt;&#x2F;p&gt;</span><br><span class="line">&lt;div style&#x3D;&quot;background:#98bf21;height:100px;width:100px;position:absolute;&quot;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="jQuery-stop-方法"><a href="#jQuery-stop-方法" class="headerlink" title="jQuery stop() 方法"></a>jQuery stop() 方法</h1><p>jQuery stop() 方法用于停止动画或效果，在它们完成之前。</p>
+<p>stop() 方法适用于所有 jQuery 效果函数，包括滑动、淡入淡出和自定义动画。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$(selector).stop(stopAll,goToEnd);</span><br></pre></td></tr></table></figure>
+
+<p>可选的 stopAll 参数规定是否应该清除动画队列。默认是 false，即仅停止活动的动画，允许任何排入队列的动画向后执行。</p>
+<p>可选的 goToEnd 参数规定是否立即完成当前动画。默认是 false。</p>
+<p>因此，默认地，stop() 会清除在被选元素上指定的当前动画。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#x2F;jquery&#x2F;jquery-1.11.1.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt; </span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;#flip&quot;).click(function()&#123;</span><br><span class="line">    $(&quot;#panel&quot;).slideDown(5000);</span><br><span class="line">  &#125;);</span><br><span class="line">  $(&quot;#stop&quot;).click(function()&#123;</span><br><span class="line">    $(&quot;#panel&quot;).stop();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"> </span><br><span class="line">&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt; </span><br><span class="line">#panel,#flip</span><br><span class="line">&#123;</span><br><span class="line">padding:5px;</span><br><span class="line">text-align:center;</span><br><span class="line">background-color:#e5eecc;</span><br><span class="line">border:solid 1px #c3c3c3;</span><br><span class="line">&#125;</span><br><span class="line">#panel</span><br><span class="line">&#123;</span><br><span class="line">padding:50px;</span><br><span class="line">display:none;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line"> </span><br><span class="line">&lt;button id&#x3D;&quot;stop&quot;&gt;停止滑动&lt;&#x2F;button&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;flip&quot;&gt;点击这里，向下滑动面板&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;panel&quot;&gt;Hello world!&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="jQuery-Callback-函数"><a href="#jQuery-Callback-函数" class="headerlink" title="jQuery Callback 函数"></a>jQuery Callback 函数</h2><p>当动画 100% 完成后，即调用 Callback 函数。</p>
+<h3 id="典型的语法："><a href="#典型的语法：" class="headerlink" title="典型的语法："></a>典型的语法：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$(selector).hide(speed,callback)</span><br></pre></td></tr></table></figure>
+
+<p><em>callback</em> 参数是一个在 hide 操作完成后被执行的函数。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;jquery&#x2F;jquery.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  $(&quot;button&quot;).click(function()&#123;</span><br><span class="line">  $(&quot;p&quot;).hide(1000,function()&#123;</span><br><span class="line">    alert(&quot;The paragraph is now hidden&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;button type&#x3D;&quot;button&quot;&gt;Hide&lt;&#x2F;button&gt;</span><br><span class="line">&lt;p&gt;This is a paragraph with little content.&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="jQuery-方法链接"><a href="#jQuery-方法链接" class="headerlink" title="jQuery 方法链接"></a>jQuery 方法链接</h2><p>直到现在，我们都是一次写一条 jQuery 语句（一条接着另一条）。</p>
+<p>不过，有一种名为链接（chaining）的技术，允许我们在相同的元素上运行多条 jQuery 命令，一条接着另一条。</p>
+<p><strong>提示：</strong>这样的话，浏览器就不必多次查找相同的元素。</p>
+<p>如需链接一个动作，您只需简单地把该动作追加到之前的动作上。</p>
+<h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子 1"></a>例子 1</h3><p>下面的例子把 css(), slideUp(), and slideDown() 链接在一起。”p1” 元素首先会变为红色，然后向上滑动，然后向下滑动：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;&#x2F;jquery&#x2F;jquery-1.11.1.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">$(document).ready(function()</span><br><span class="line">  &#123;</span><br><span class="line">  $(&quot;button&quot;).click(function()&#123;</span><br><span class="line">    $(&quot;#p1&quot;).css(&quot;color&quot;,&quot;red&quot;).slideUp(2000).slideDown(2000);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;p id&#x3D;&quot;p1&quot;&gt;jQuery 乐趣十足！&lt;&#x2F;p&gt;</span><br><span class="line">&lt;button&gt;点击这里&lt;&#x2F;button&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>gulp打包成css</title>
+    <url>/2020/05/30/gulp%E6%89%93%E5%8C%85%E6%88%90css/</url>
+    <content><![CDATA[<h2 id="gulp打包成css"><a href="#gulp打包成css" class="headerlink" title="gulp打包成css"></a>gulp打包成css</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、安装gulp:	npm install --global gulp</span><br><span class="line">2、cd到Desktop(桌面)，新建一个sassDemo文件夹，用mkdir命令，然后cd到这个文件</span><br><span class="line">3、执行npm init	一直回车即可</span><br><span class="line">4、然后执行npm install --save-dev gulp   </span><br><span class="line">5、使用gulp搭建sass环境</span><br><span class="line">npm install gulp-sass --save-dev</span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line">6、在根目录新建一个gulpfile.js文件 </span><br><span class="line">    var gulp &#x3D;require(&#39;gulp&#39;);</span><br><span class="line">    var sass &#x3D; require(&#39;gulp-sass&#39;);</span><br><span class="line"></span><br><span class="line">    gulp.task(&#39;sass&#39;,gulp.series(function()&#123;</span><br><span class="line">        return gulp.src(&#39;app&#x2F;scss&#x2F;*.scss&#39;)</span><br><span class="line">         .pipe(sass())</span><br><span class="line">         .pipe(gulp.dest(&#39;app&#x2F;css&#39;))</span><br><span class="line">    &#125;));</span><br><span class="line">7、运行 gulp sass</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>Vue-cli</title>
+    <url>/2020/05/30/Vue-cli/</url>
+    <content><![CDATA[<h1 id="Vue-cli"><a href="#Vue-cli" class="headerlink" title="Vue-cli"></a>Vue-cli</h1><h4 id="关于旧版本"><a href="#关于旧版本" class="headerlink" title="关于旧版本"></a>关于旧版本</h4><p>Vue CLI 的包名称由 <code>vue-cli</code> 改成了 <code>@vue/cli</code>。 如果你已经全局安装了旧版本的 <code>vue-cli</code> (1.x 或 2.x)，你需要先通过 <code>npm uninstall vue-cli -g</code> 或 <code>yarn global remove vue-cli</code> 卸载它。</p>
+<a id="more"></a>
+
+<h4 id="Node-版本要求"><a href="#Node-版本要求" class="headerlink" title="Node 版本要求"></a>Node 版本要求</h4><p>Vue CLI 需要 <a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a></p>
+<p><a href="https://nodejs.org/" target="_blank" rel="noopener"> </a> 8.9 或更高版本 (推荐 8.11.0+)。你可以使用 <a href="https://github.com/creationix/nvm" target="_blank" rel="noopener"> </a><a href="https://github.com/coreybutler/nvm-windows" target="_blank" rel="noopener">nvm-windows</a> 在同一台电脑中管理多个 Node 版本。</p>
+<h3 id="命令安装"><a href="#命令安装" class="headerlink" title="命令安装"></a>命令安装</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g @vue&#x2F;cli  或者  yarn global add @vue&#x2F;cli</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="命令来检查其版本"><a href="#命令来检查其版本" class="headerlink" title="命令来检查其版本"></a>命令来检查其版本</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">vue --version</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="创建项目的方法"><a href="#创建项目的方法" class="headerlink" title="创建项目的方法"></a>创建项目的方法</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、vue create 项目名称</span><br><span class="line">2、vue ui ，回车之后会生产一个网址，打开即可创建项目</span><br><span class="line">注意：第一种值命令行创建方法，第二种是图形化创建方法</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm run serve:热更新，此时只能通过localhost:8080打开（开发时用）</span><br><span class="line">npm run build:打包生产最终的代码，会多一个buli目录，里面的程序可以运行(项目完成时用)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="我自己配置的一个安装名字"><a href="#我自己配置的一个安装名字" class="headerlink" title="我自己配置的一个安装名字"></a>我自己配置的一个安装名字</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">名字：hhy</span><br><span class="line">安装的功能：只有第一个：babel</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="创建一个项目-testapp"><a href="#创建一个项目-testapp" class="headerlink" title="创建一个项目:testapp"></a>创建一个项目:testapp</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、找到你要安装的目录，然后在命令行打开，输入：vue create 项目名称</span><br><span class="line">2、提示你选择一个安装方式，默认有两种，一种是默认安装，一种是手动安装，选择手动安装</span><br><span class="line">3、提示你要选择的功能,根据你的需求选择对应的功能,选择babel</span><br><span class="line">4、提示你选择每一个配置文件是单独的还是一个所有配置文件都在一个文件里,选择第二种</span><br><span class="line">5、是否把你现在配置的这个安装方式保存，是，名字：hhy</span><br><span class="line">6、安装成功，cd进这个项目，运行npm run serve</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>jquery常用函数</title>
+    <url>/2020/05/30/jquery%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p><strong>jquery常用函数</strong></p>
+<p>1.var offset=$(“#id名字”).offset();//获得当前id控件的位置信息<br>offset.left;//获得当前控件离浏览器左边框的距离<br>offset.top;//获得当前控件离浏览器上边框的距离</p>
+<a id="more"></a>
+
+<p>2.$(“#id”).height();//获得当前控件的高度–$(“#id”).height(num);//设置当前控件的高度–$(“#id”).width();//获得当前控件的宽度–$(“#id”).width(num);//设置当前控件的宽度<br>3.$(“#id”).css(“top”–”left”–”display:block显示,none不显示”);//设置当前控件的css样式（）里面可以写各种该控件的属性<br>4.$(“#id”).val(str)//给当前控件赋值–如果是给select标签赋值就可以给让select标签选中这值$(“#bqmbselect”).change();<br>5.$(“#id”).empty();//清空当前控件的值<br>6.$(“#id name”)//获得当前控件的子控件 –name指标签名字<br>7.$(“#id”).append(str);//动态的给该控件写代码，可以写标准的html代码,例如:$(“#mydiv ul”).append(“<li data='" value1 "'>“ value2 “</li>“);<br>8.$(“#id li”).each(function(a,b){});//循环一个控件,例如:li,a为当前循环内容的索引，b为每一个当前循环的控件，都为必填<br>9.$(a).attr(b);//取得a控件b属性的值<br>10.setTimeout(function(){},100);//控制方法在多少毫秒后执行<br>11.$(“#id”).focus(function(){});//聚焦事件<br>12.$(“#id”).blur(function(){});//失焦事件<br>13.eval(str);//动态执行字符串<br>14.$(“#id”).html();//获得当前控件在html上显示的值 $(“#id”).text();//获取input框的值<br>15.$(“#id”).click(function(){});//点击事件<br>16.$.trim(str);//去空格<br>17.$.cookie(“cookieName”,”cookieValue”);<br>18.$(“#id”).prop(“selected”,’selected’);//设置当前控件的属性的值<br>19.$(“#id”).hover(function(){});//鼠标悬停事件<br>20.$.ajax({<br>type : “POST”,<br>url : url,<br>data : json,</p>
+<p>dataType : “json”,<br>success : function(data) {}<br>});<br>21.$(“#id”).find(“option[value=’?’] input[name=’?’] select[name=’?’]”)<br>22.isNaN(str);//判断一个字符串是不是数字,返回的是一个boolean<br>23.parseFloat(str);//将一个数字字符串转换成数字<br>24.var jsvalue=(isNaN($.trim($(n).find(“td”).eq(3).html())) ||<br>$.trim($(n).find(“td”).eq(3).html())==””)?0:parseFloat($.trim($(n).find(“td”).eq(3).html()));<br>25.$(“#id”).parent();//获得该id元素的父元素<br>26.$(“#id”).children();//获得该id元素的子元素,$(“#id”).children(“a”);//获得该元素子元素中的a标签元素<br>27.$(“#id”).sibling();//获得该id元素的同辈元素<br>28.$(“#id”).addClass(“abc”);//给该Id元素添加名字为abc的样式,删除为removClass(“abc”);<br>29.$(“#id”).unbind();//删除该id绑定的函数事件,括号内有字符串的话则删除的是指定事件,例:”click”<br>30.$(“#id”).clone(true);//克隆<br>31.$(“#id”).not($(“#id last”));//不是id中最后一个<br>32.Num.toFixed(num);//保存数字Num的num位小数<br>33.$(“#id”).hide();//隐藏id<br>34.$(“#id”).show();//显示id<br>35.alert(“val”);//输出值</p>
+<p>――――――――――――――――――――――――――――</p>
+<p><strong>常用的JQuery函数及功能小结</strong></p>
+<p>这篇文章主要介绍了常用的JQuery函数及功能小结 的相关资料,需要的朋友可以参考下</p>
+<p><strong>1.文档加载完成执行函数</strong></p>
+<p><a href="https://www.jb51.net/article/81425.htm" target="_blank" rel="noopener">?</a></p>
+<table>
+<thead>
+<tr>
+<th>123</th>
+<th>$(document).ready(function(){alert(“开始了”);});</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>2.添加/删除CSS类</strong></p>
+<p><a href="https://www.jb51.net/article/81425.htm" target="_blank" rel="noopener">?</a></p>
+<table>
+<thead>
+<tr>
+<th>12</th>
+<th>$(“#some-id”).addClass(“NewClassName”);$(“#some-id”).removeClass(“ClassNameToBeRemoved”);</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>3.选择符 利用了CSS和Xpath（XML Path Language）选择符的能力，以及jQuery独有的选择符</strong></p>
+<p><strong>3.1常用的：</strong></p>
+<p>1.根据标签名： $(‘p’) 选择文档中的所有段落</p>
+<p>\2. 根据ID： $(“#some-id”)</p>
+<p>3.类： $(‘.some-class’)</p>
+<p><strong>3.2使用CSS选择符：</strong></p>
+<p><a href="https://www.jb51.net/article/81425.htm" target="_blank" rel="noopener">?</a></p>
+<table>
+<thead>
+<tr>
+<th>12</th>
+<th>$(“#some-id &gt; li”) 选择特定id下的所有子li元素$(“#some-id li:not(.horizontal)”) 伪类选择，特定id下所有没有.horizontal 类的li元素</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>3.3使用XPath选择符：</strong></p>
+<p>属性选择：$(“a[@title]”) 选择所有带title属性的链接</p>
+<p>$(“div[ol]”) 选择包含一个ol元素的所有div元素</p>
+<p>$(‘a[@href^=”mailto:%22]’) 选择所有带href属性[@href]且该属性值以mailto开头^=”mailto”（^标识字符串开始，$标识字符串结</p>
+<p>尾，*表示字符串中任意位置）</p>
+<p>$(‘a[@href$=”.pdf”]’) 选择带有href属性且该属性值以.pdf结尾的所有链接</p>
+<p>$(‘a[@href*=”mysite.com”]’) 选择mysite.com出现在href任意位置(包含mysite.com)的所有链接</p>
+<p><strong>3.4JQuery自定义选择符（过滤器，从已选择的结果集中过滤出符合某一条件的所有元素），与CSS的伪类选择符相似，使用“:”开头</strong></p>
+<p>1.$(‘div.horizontal:eq(1)’) 选择带有类horizontal的div集合中的第2个项</p>
+<p>$(‘div:nth-child(1)’) 选择作为其父元素第1个子元素的所有div</p>
+<p>2.自定义选择符:odd和:even选择奇偶行</p>
+<p>$(‘tr:odd’).addClass(‘odd’); //过滤选择结果集中的奇数元素</p>
+<p>$(‘tr:even’).addClass(‘even’); //过滤选择结果集中的偶数元素</p>
+<p>3.自定义选择符:contains()</p>
+<p>$(‘td:contains(“Henry”)’) 选择包含Henry字符串的所有表格</p>
+<p><strong>3.5JQuery选择函数</strong></p>
+<p>1.$(‘#some-id’).parent() 选择特定元素的父元素</p>
+<p>2.$(‘#some-id’).next() 选择特定元素最近的下一个同级元素</p>
+<p>3.$(‘#some-id’).siblings() 选择特定元素的所有同级元素</p>
+<p>4.$(‘#some-id’).find(‘.some-class’) 选择特定元素下所有包含特定类的元素</p>
+<p>5.$(‘#some-id’).find(‘td’).not(‘:contains(“Henry”)’) 选择特定元素下表格内容不包含Henry的所有元素</p>
+<p>5.$(‘#some-id’).find(‘td’).not(‘:contains(“Henry”)’).end() .end()表示回到最后一次.find()的元素处</p>
+<p><strong>3.6访问DOM元素，使用get()方法从选择后的JQuery对象中获得，去掉JQuery的包装</strong></p>
+<p><a href="https://www.jb51.net/article/81425.htm" target="_blank" rel="noopener">?</a></p>
+<table>
+<thead>
+<tr>
+<th>12</th>
+<th>var myTag = $(‘#some-id’).get(0).tagName;var myTag = $(‘#some-id’)[0].tagName; //与上面的等效</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>4.事件（都是给某一元素绑定事件）</strong></p>
+<p><strong>4.1绑定事件</strong> </p>
+<p><a href="https://www.jb51.net/article/81425.htm" target="_blank" rel="noopener">?</a></p>
+<table>
+<thead>
+<tr>
+<th>123</th>
+<th>$(“#some-id”).bind(“click”, function(){ })$(“#some-id”).unbind(“click”, bindedFunctionName); //移除已绑定的事件，前提是绑定的函数有名称（不是匿名函数）$(“#some-id”).click(function(){ })</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>4.2复合函数绑定事件</strong></p>
+<p><a href="https://www.jb51.net/article/81425.htm" target="_blank" rel="noopener">?</a></p>
+<table>
+<thead>
+<tr>
+<th>1234</th>
+<th>$(“#some-id”).toggle(function(){ } ,function(){ }); //交替执行$(“#some-id”).toggleClass(“hidden”); // 添加/删除类交替进行$(“#some-id”).hover(function(){ }, function(){ }); //鼠标进入元素时执行第一个函数，离开元素时执行第二个函数$(“#some-id”).one(“click”, functionName); //只需触发一次，随后便立即解除绑定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>4.3模仿用户触发某一事件</strong></p>
+<p>$(“#some-id”).trigger(“click”); //触发特定元素的click事件</p>
+<p><strong>5.为元素添加效果</strong></p>
+<p><strong>5.1读取或设置CSS样式属性</strong></p>
+<p>$(“#some-id”).css(“property”) //读取样式值<br>$(‘#some-id’).css(‘property’, ‘value’) //设置一个样式值<br>$(‘#some-id’).css({property1: ‘value1’, property2: ‘value2’}) //设置多个样式属性</p>
+<p><strong>5.2改变字体大小</strong></p>
+<p><a href="https://www.jb51.net/article/81425.htm" target="_blank" rel="noopener">?</a></p>
+<table>
+<thead>
+<tr>
+<th>123456789</th>
+<th>$(document).ready({$(‘#button-id’).click(function(){var currentSize = $(‘#text-id’).css(‘fontSize’); //获取字体大小，如30pxvar num = parseFloat(currentSize, 10); //将值转为浮点数，.parseFloat( , )为javascript内置函数，这里是转为10进制的浮点数var unit = currentSize.slice(-2); //获取单位名称，如px，.slice()是javascript内置函数，获取字符串指从定位置开始的子字符串，-2表示倒数两个字符num *= 1.5;$(‘text-id’).css(‘fontSize’, num + unit); //设置字体大小样式});});</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>5.3隐藏和显示</strong></p>
+<p>$(‘#some-id’).show(); //无效果，会自动记录原来的display属性值（如：block, inline），再回复display值<br>$(‘#some-id’).hide(); //无效果，等效于：$(‘#some-id’).css(‘display’, ‘none’); 隐藏元素，不保留物理位置<br>大小、透明度逐渐变化的显示或隐藏</p>
+<p>$(‘#some-id’).show(‘slow’); //指定显示速度，在指定时间内元素的高、宽、不透明度逐渐增加到属性值，有：slow是0.6秒，normal是0.4秒，fast是0.2秒，或者直接填入毫秒数<br>$(‘#some-id’).hide(800); //与.show()指定速度显示一样，指定时间内高、宽、不透明度逐渐减小到0</p>
+<p>淡入淡出</p>
+<p>$(‘some-id’).fadeIn(‘slow’); //指定时间内不透明度属性值由0增加到1<br>$(‘some-id’).fadeOut(‘slow’); //指定时间内不透明度值由1减小到0</p>
+<p><strong>5.4构建具有动画效果的show</strong></p>
+<p>主要调用.animate()方法，其有4个参数：包含样式属性及值的映射；可选的速度参数；可选的缓动类型；可选的回调函数；</p>
+<p><strong>1.并发显示多个效果</strong></p>
+<p>$(‘#some-id’).animate({height: ‘show’, width: ‘show’, opacity: ‘show’}, ‘slow’, function(){ alert(‘动画显示元素’);});<br>$(‘div .button’).animate({left:600, height:44}, ‘slow’); //水平位置从0移动到600，高度由0增加到44</p>
+<p><strong>2.排队显示多个效果，级联多个.animate()，一个效果显示完了再显示下一个效果</strong></p>
+<p>$(‘#some-id’).animate({left:600}, ‘slow’).animate({height: 44}, ‘slow’);<br>6DOM操作</p>
+<p><strong>6.1属性操作</strong></p>
+<p><a href="https://www.jb51.net/article/81425.htm" target="_blank" rel="noopener">?</a></p>
+<table>
+<thead>
+<tr>
+<th>1234567891011</th>
+<th>$(‘#some-id’).attr(‘property’); //获取属性$(‘#some-id’).attr(‘property’,’value’); //设置属性$(‘#some-id’).attr({‘property1’: ‘value1’, ‘property2’: ‘value2’}); //设置多个属性修改一个段落中所有链接，并给每个链接附上新的id号$(‘div p .content a’).each(function(index){$(this).attr({‘rel’: ‘external’,’id’: ‘link_’ + index});});// <strong>*****</strong> JQuery的.each()类似一个迭代器，给其传递的参数index类似一个计数器 <strong>*****</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>6.2插入新元素</p>
+<p>1.将元素插入到其他元素前面：.insertBefore()和.before()</p>
+<p>2.将元素插入到其他元素后面：.insertAfter()和after()</p>
+<p>3.将元素插入到其他元素内部或后面（相当于追加一个元素）：appendTo()和append()</p>
+<p>4.将元素插入到其他元素内部或前面（相当于追加一个元素）：prependTo()和prepend()</p>
+<p>6.3包装元素，将元素包装到其他元素中 .wrap();</p>
+<p>$(‘#some-id’).wrap(‘<li></li>‘); // 将某一特定元素包装到li中，即在特定元素外围添加一个包围元素</p>
+<p>6.4复制元素 .clone()</p>
+<p>1.$(‘#some-id’).clone().appendTo($(‘body’));</p>
+<p>2.复制深度，当传入false参数时，只复制匹配上的元素，其内部的其他元素不复制</p>
+<p>$(‘#some-id’).clone(false)</p>
+<p>注意：.clone()方法不会复制元素中的事件</p>
+<p>6.5移除匹配元素中的元素，类似清空元素</p>
+<p>$(‘#some-id’).empty();</p>
+<p>6.6从DOM中移除匹配的元素及其后代元素</p>
+<p>$(‘#some-id’).remove();</p>
+<p>有关常用的JQuery函数及功能小结 小编就给大家介绍到这里，希望对大家有所帮助！</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>linux</title>
+    <url>/2020/05/30/linux/</url>
+    <content><![CDATA[<h1 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h1><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pwd:当前绝对路径</span><br><span class="line"></span><br><span class="line">exit:命令行里面退出登录</span><br><span class="line"></span><br><span class="line">Ctrl+Alt+F1:</span><br><span class="line"></span><br><span class="line">Ctrl+Alt+T:打开终端</span><br><span class="line"></span><br><span class="line">ctrl+alt+f1和f2是图形化界面	ctrl+alt+f3至f7是命令行界面</span><br><span class="line"></span><br><span class="line">ls -l 文件：查看文件的详细信息</span><br><span class="line"></span><br><span class="line">ls -ld 文件夹：查看文件夹的详细信息</span><br><span class="line"></span><br><span class="line">ctrl+l: 清理命令行</span><br><span class="line"></span><br><span class="line">su root: 切换超级管理员</span><br><span class="line"></span><br><span class="line">su - root:切换超级管理员并且环境也切换</span><br><span class="line"></span><br><span class="line">man 要查看的命令:查看这个命令的用法</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="【特殊情况】"><a href="#【特殊情况】" class="headerlink" title="【特殊情况】"></a>【特殊情况】</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、设置umask时，假如文件减去umask时出现负数，则该项则为零。 </span><br><span class="line">如：umask为：027；文件：666-027&#x3D;640</span><br><span class="line"></span><br><span class="line">2、当umask为奇数时,文件的权限公式为6-(n-1). </span><br><span class="line">如：umask为：234  文件：666-234&#x3D;442</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="【文件夹操作】"><a href="#【文件夹操作】" class="headerlink" title="【文件夹操作】"></a>【文件夹操作】</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir:新建文件夹 如：mkdir pg</span><br><span class="line"></span><br><span class="line">mkdir -p &#x2F;home&#x2F;hhy&#x2F;d1&#x2F;d2	:-p是指你创建的路径下有未创建的文件夹，则也自动创建，如d1不存在也会自动创建</span><br><span class="line"></span><br><span class="line">rmdir:删除文件夹（只能删除空的文件夹） 如：rmdir pg</span><br><span class="line"></span><br><span class="line">mv:重命名文件夹 如：mv pg gp</span><br><span class="line"></span><br><span class="line">cd:切换目录</span><br><span class="line"></span><br><span class="line">~ &#x3D;主目录 如：~hai  &#x3D;&#x3D; &#x2F;home&#x2F;hhy&#x2F;hai</span><br><span class="line"></span><br><span class="line">.：当前目录 </span><br><span class="line"></span><br><span class="line">.. :上一级目录</span><br><span class="line"></span><br><span class="line">ls:显示当前文件夹的文件名字</span><br><span class="line">ls-l:显示当前文件夹下文件的具体信息</span><br><span class="line">ls-a: 显示当前文件夹下所有的文件（包括.开头的隐藏文件）</span><br><span class="line">a选择可以和l选项组合使用,ls命令可以使用指导一个文件路径</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="【文件操作】"><a href="#【文件操作】" class="headerlink" title="【文件操作】"></a>【文件操作】</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">touch:新建文件 如：touch file</span><br><span class="line"></span><br><span class="line">rm:删除文件 如：rm file</span><br><span class="line"></span><br><span class="line">echo ‘I am a boy’ &gt;&gt; .&#x2F;test.txt：添加文本内容</span><br><span class="line"></span><br><span class="line">rm -r；删除文件夹和里面的文件 如：rm -r file</span><br><span class="line"></span><br><span class="line">mv:重命名	如：mv file file2</span><br><span class="line"></span><br><span class="line">cat:查看文件内容(内容较少的情况下)  如：cat file</span><br><span class="line"></span><br><span class="line">less:查看文件内容(内容较多的情况下),退出需要按q  如：less file</span><br><span class="line"></span><br><span class="line">mv file pg:表示把file这个文件移动到pg这个文件夹下</span><br><span class="line"></span><br><span class="line">&gt; :会把原来的内容替换掉	如：cat file1 &gt; file2 会把file1的内容复制到file2里，file2原本的内容清空</span><br><span class="line"></span><br><span class="line">&gt; &gt; :不会替换原来的内容，并且会在末尾添加上去</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-2-5命令快捷方式"><a href="#3-2-5命令快捷方式" class="headerlink" title="3.2.5命令快捷方式"></a>3.2.5命令快捷方式</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">使用tab键进行命令补齐</span><br><span class="line">使用history命令查看历史记录 	如：history 20</span><br><span class="line">配置别名：alias,关闭命令行之后就会失效  如：alias ch&#x3D;&#39;cd &#x2F;home&#x2F;hhy&#39;</span><br><span class="line">在一行输入多个命令  </span><br><span class="line">可以使用;符号分割：不管前面命令是否执行成功，后面都会执行</span><br><span class="line">可以使用&amp;&amp;符号分割：前面命令执行失败，后面命令不会执行</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-3-3文件操作命令"><a href="#3-3-3文件操作命令" class="headerlink" title="3.3.3文件操作命令"></a>3.3.3文件操作命令</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">使用cp命令复制文件或目录</span><br><span class="line">用法：</span><br><span class="line">cp [选项] &lt;原文件或目录&gt; &lt;目的文件或目录&gt;</span><br><span class="line">例：</span><br><span class="line">cp -r pg pgg	(复制文件不用-r，复制文件夹用-r)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">使用ln命令添加链接：分为软链接和硬链接</span><br><span class="line">软连接可以用于目录，可以跨分区；硬连接不可以用于目录，不可以跨分区</span><br><span class="line">软连接创建，删除源文件访问不了，和源文件不是同一个文件</span><br><span class="line">	ln -s &lt;源文件&gt; &lt;目标文件&gt;</span><br><span class="line">	例： ln -s sun.txt sun.soft</span><br><span class="line">硬链接创建，删除源文件还能访问，和源文件是同一个文件：</span><br><span class="line">	ln &lt;源文件&gt; &lt;目标文件&gt;</span><br><span class="line">	例： ln sun.txt sun.soft</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-3-4重导和管道"><a href="#3-3-4重导和管道" class="headerlink" title="3.3.4重导和管道"></a>3.3.4重导和管道</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">重导：</span><br><span class="line">&gt;会把原来的文件内容清空</span><br><span class="line">&gt;&gt;保留原来的内容，并把新内容添加到末尾</span><br><span class="line"></span><br><span class="line">管道：</span><br><span class="line">前一个命令的结果作为下一个命令的输入,用|符号</span><br><span class="line">例：ls -l &#x2F;etc | less</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-4-1文件属性和权限"><a href="#3-4-1文件属性和权限" class="headerlink" title="3.4.1文件属性和权限"></a>3.4.1文件属性和权限</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ls -li test  :l是显示具体信息；  i是显示inode值的id</span><br><span class="line"></span><br><span class="line">文件权限：</span><br><span class="line">r: 可读</span><br><span class="line">w: 可写</span><br><span class="line">x: 可执行</span><br><span class="line">-： 无权限</span><br><span class="line"></span><br><span class="line">例：rwxrw-r--</span><br><span class="line">rwx:拥有者权限</span><br><span class="line">rw-:属组</span><br><span class="line">r--:其它</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-4-2文件权限操作的相关命令"><a href="#3-4-2文件权限操作的相关命令" class="headerlink" title="3.4.2文件权限操作的相关命令"></a>3.4.2文件权限操作的相关命令</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">《1》修改权限方法一：使用chmod修改文件或目录权限</span><br><span class="line">    用法：</span><br><span class="line">    chmod  [选项]  &lt;权限设定&gt;  &lt;文件&#x2F;目录名&gt;</span><br><span class="line">    -R表示递归修改目录下所有文件或子目录的权限</span><br><span class="line">	例：chmod 631 txt</span><br><span class="line">&lt;权限设定&gt; r、w、x、-分别用数字4、2、1、0</span><br><span class="line"></span><br><span class="line">《2》修改权限方法二：通过助记语法修改，用直观的字符来表示，字符定义如下：</span><br><span class="line">u代表属主</span><br><span class="line">g代表属组</span><br><span class="line">o代表其他用户</span><br><span class="line">a代表属主、属组和其他用户</span><br><span class="line">+代表增加相关权限</span><br><span class="line">-代表减去相关权限</span><br><span class="line">例：</span><br><span class="line">chmod  go-x  sun.txt</span><br><span class="line"></span><br><span class="line">《3》使用chown命令修改文件属主和用户组</span><br><span class="line">注意：</span><br><span class="line">1、（想要切换属主和用户组，先新增一个用户）</span><br><span class="line">2、（要使用chown，先切换到root用户,用su命令）</span><br><span class="line">用法：</span><br><span class="line">chown  [选项]  &lt;属主[:属组]&gt;  &lt;文件&#x2F;目录名&gt;</span><br><span class="line">-R表示递归修改</span><br><span class="line">例如，将program.c文件的属主改为用户zhang：</span><br><span class="line">[root@debian  test]#  chown  zhang  program.c</span><br><span class="line">例如，将&#x2F;home&#x2F;public目录及其下级子目录和文件的属主和属组分别改为zhang和manager：</span><br><span class="line">[root@Debian  test]#  chown  -R  zhang:manager  &#x2F;home&#x2F;public</span><br><span class="line"></span><br><span class="line">《4》使用chgrp改变文件或目录的所属用户组(和chown相似,但只能改变属组，不能改变属主)</span><br><span class="line">用法：</span><br><span class="line">chgrp  [选项]  &lt;属组&gt;  &lt;文件&#x2F;目录名&gt;</span><br><span class="line">-R表示递归修改</span><br><span class="line">例：</span><br><span class="line">[root@Debian  test]#  chgrp  yzzd  sun.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">《5》使用umask设置创建文件或目录时的默认权限</span><br><span class="line">用法：</span><br><span class="line">1、查看权限掩码：umask</span><br><span class="line">2、设定权限掩码：umask  [权限掩码]</span><br><span class="line">权限掩码由3位八进制数字nnn组成，其中nnn范围为000~777</span><br><span class="line">文件权限&#x3D;666-nnn</span><br><span class="line">目录权限&#x3D;777-nnn</span><br><span class="line">例如，设定权限掩码为666</span><br><span class="line">[root@Debian  test]#  umask  666</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="命令创建用户和删除用户"><a href="#命令创建用户和删除用户" class="headerlink" title="命令创建用户和删除用户"></a>命令创建用户和删除用户</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、用su - root切换到超级管理员</span><br><span class="line">2、使用adduser bob 创建一个用户</span><br><span class="line">3、使用deluser --remove-home bob 连主目录一起删除</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="修改登录shell"><a href="#修改登录shell" class="headerlink" title="修改登录shell"></a>修改登录shell</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">usermod  -s  &#x2F;bin&#x2F;bash  test  (bash可以更换)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">当前密码：passwd</span><br><span class="line">其它用户密码：passwd bob</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h2><h3 id="VI编辑器"><a href="#VI编辑器" class="headerlink" title="VI编辑器"></a>VI编辑器</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、命令行输入：vi：回车即可进入命令模式，此时不能插入内容</span><br><span class="line">2、在命令模式下按i即可进入插入模式，此时可以编辑内容了</span><br><span class="line">3、如果写错要修改先按ESC回到命令模式，如果要修改的内容前面还有内容，可以按dd删除一整行，x可以删除单个字符，在命令模式下可以用键盘的方向键,此时就可以定位到你想要操作的地方了，并且使用对应的命令来操作</span><br><span class="line">4、如果内容无误，则回到命令模式(ESC)，然后进入末行模式(shift+:)</span><br><span class="line">5、进入末行模式后，进行文件保存：w 保存的文件名 。 或者w  文件的路径。 回车后自动进入命令模式	</span><br><span class="line">6、退出，先进入末行命令(shift+:)；按q回车退出</span><br><span class="line">（注意：如果更改内容后还没有保存,按q是退出不了的，可以使用q!（表示强制退出，不保存））</span><br><span class="line">7、退出之后发现还要修改，可以用：vi 保存的文件名</span><br><span class="line"></span><br><span class="line">注意点：</span><br><span class="line">1、在命令模式下按i可以进入插入模式，并且只能在当前光标位置的前面插入内容</span><br><span class="line">1、在命令模式下按a可以进入插入模式，并且只能在当前光标位置的后面插入内容</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h3><h4 id="软件的安装与卸载"><a href="#软件的安装与卸载" class="headerlink" title="软件的安装与卸载"></a>软件的安装与卸载</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">软件的安装与卸载可以在命令行里进行，但是由于安装软件的服务器在国外，所以安装软件速度比较慢，因此需要将安装软件的服务器地址换成国内的。</span><br><span class="line">1、更改配置文件，用VI编辑器打开&#x2F;etc&#x2F;apt&#x2F;sources.list,也就是sudo vi &#x2F;etc&#x2F;apt&#x2F;sources.list</span><br><span class="line">2、把里面的所有内容删掉，换成国内的服务器地址，在这个网址里面随便找一个国内的服务器，放到刚刚的文件里https:&#x2F;&#x2F;cloud.tencent.com&#x2F;developer&#x2F;article&#x2F;1590080</span><br><span class="line">3、更新软件包列表：apt-get update（用时每天更新一次）</span><br><span class="line">4、搜素软件包：apt-cache search</span><br><span class="line">5、查看软件包：apt&#x2F;cache show</span><br><span class="line">6、安装软件包：apt-get install 软件包名</span><br><span class="line">7、更新全部软件包：apt-get update</span><br><span class="line">8、卸载软件包：apt-get[--purge] remove 软件包名	（[]表示可选项,如果用就删除更干净）</span><br><span class="line">注意：4和5不是必选项，只是你不清楚的时候可以查看，如果清楚可以直接执行3和6就可以</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>webpack</title>
+    <url>/2020/05/30/webpack/</url>
+    <content><![CDATA[<h2 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h2><p>1、全局安装webpack        npm install webpack -g</p>
+<p>2、全局安装webpack -cli        npm install webpack-cli -g</p>
+<p>3、：进入选定目录 ，然后执行 npm init       一路回车即可</p>
+<a id="more"></a>
+
+<p>3.1、为选定的目录安装依赖          npm install webpack –save-dev</p>
+<p>4、为指定的文件打包：</p>
+<p>4.1、webpack index.js  -o output.js (生产模式)</p>
+<p>4.2、webpack –mode development index.js  -o output.js (开发模式)</p>
+<p>5、使用默认的打包方式：</p>
+<p>5.1：webpack –mode development</p>
+<p>5.2：会自动把src文件夹（需要自己创建）下的文件打包到dist文件夹（自动生成）下</p>
+<h3 id="6、使用自定义的打包方式："><a href="#6、使用自定义的打包方式：" class="headerlink" title="6、使用自定义的打包方式："></a>6、使用自定义的打包方式：</h3><p>6.1：在根目录下创建webpack.config.js</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;单文件打包</span><br><span class="line">&#x2F;* const path &#x3D; require(&#39;path&#39;); &#x2F;&#x2F;引入我们的node模块里的path</span><br><span class="line">    &#x2F;&#x2F;测试下 console.log(path.resolve(__dirname,&#39;dist&#39;)); &#x2F;&#x2F;物理地址拼接</span><br><span class="line">    module.exports &#x3D; &#123;</span><br><span class="line">        entry: &#39;.&#x2F;src&#x2F;index.js&#39;, &#x2F;&#x2F;入口文件  在vue-cli main.js</span><br><span class="line">        output: &#123;       &#x2F;&#x2F;webpack如何向外输出</span><br><span class="line">            path: path.resolve(__dirname, &#39;dist&#39;),&#x2F;&#x2F;定位，输出文件的目标路径</span><br><span class="line">            filename: &#39;index.js&#39; &#x2F;&#x2F;文件名[name].js默认，也可自行配置</span><br><span class="line">        &#125;</span><br><span class="line">     &#125;;*&#x2F;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;多文件打包</span><br><span class="line">      const path &#x3D; require(&#39;path&#39;); &#x2F;&#x2F;引入我们的node模块里的path</span><br><span class="line">    &#x2F;&#x2F;测试下 console.log(path.resolve(__dirname,&#39;dist&#39;)); &#x2F;&#x2F;物理地址拼接</span><br><span class="line">    module.exports &#x3D; &#123;</span><br><span class="line">        entry: &#123;</span><br><span class="line">        	home: &#39;.&#x2F;src&#x2F;home.js&#39;,</span><br><span class="line">        	about: &#39;.&#x2F;src&#x2F;about.js&#39;,</span><br><span class="line">        	other: &#39;.&#x2F;src&#x2F;other.js&#39;</span><br><span class="line">        &#125;, &#x2F;&#x2F;入口文件  在vue-cli main.js</span><br><span class="line">        output: &#123;       &#x2F;&#x2F;webpack如何向外输出</span><br><span class="line">            path: path.resolve(__dirname, &#39;dist&#39;),&#x2F;&#x2F;定位，输出文件的目标路径</span><br><span class="line">            filename: &#39;[name].js&#39; &#x2F;&#x2F;文件名[name].js默认，也可自行配置</span><br><span class="line">        &#125;,</span><br><span class="line">        &#x2F;&#x2F;mode: &quot;development&quot;</span><br><span class="line">     &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>6.2：打包命令：webpack     (打包的是生产模式的文件)     webpack –mode development(开发模式)</p>
+<p>6.3：可以在6.1里面配置默认的打包方式，然后可以直接用webpack命令        mode:  “development”      或者     mode: “production”</p>
+<h3 id="url-loader：可以打包图片，把他们打包到一个文件里面去，可以达到性能优化的功能，类似于雪碧图的功能，但是比他方便。"><a href="#url-loader：可以打包图片，把他们打包到一个文件里面去，可以达到性能优化的功能，类似于雪碧图的功能，但是比他方便。" class="headerlink" title="url-loader：可以打包图片，把他们打包到一个文件里面去，可以达到性能优化的功能，类似于雪碧图的功能，但是比他方便。"></a>url-loader：可以打包图片，把他们打包到一个文件里面去，可以达到性能优化的功能，类似于雪碧图的功能，但是比他方便。</h3><p>注意，limit的值小于图片的值时，打包出来的是普通图片，大于图片的值才是</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">第一步：npm init -y</span><br><span class="line">第二步：npm install url-loader -S</span><br><span class="line">第三步：npm install file-loader -S</span><br><span class="line">第四步：配置webpack.config.js文件：</span><br><span class="line">module: &#123;</span><br><span class="line">        	rules: [</span><br><span class="line">        	&#123;</span><br><span class="line">        		test: &#x2F;\.(png|jpg|gif)$&#x2F;i,</span><br><span class="line">        		use: [</span><br><span class="line">        			&#123;</span><br><span class="line">        				loader: &#39;url-loader&#39;,</span><br><span class="line">        				options: &#123;</span><br><span class="line">        					limit: 4192</span><br><span class="line">        				&#125;</span><br><span class="line">        			&#125;</span><br><span class="line">        		]</span><br><span class="line">        	&#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line"> 第五步：配置入口文件：如input.js</span><br><span class="line"> import img1 from &#39;.&#x2F;img&#x2F;a.png&#39;;</span><br><span class="line"> import img2 from &#39;.&#x2F;img&#x2F;b.jpg&#39;;</span><br><span class="line"> </span><br><span class="line"> 第六步：运行 webpack</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="css压缩"><a href="#css压缩" class="headerlink" title="css压缩"></a>css压缩</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">使用 mode: &quot;production&quot;可以压缩文件，但是仅仅是压缩js文件，不能压缩css文件</span><br><span class="line">要压缩css文件，先安装npm install optimize-css-assets-webpack-plugin</span><br><span class="line">在配置文件中引入：const OptimizeCss &#x3D; require(&#39;optimize-css-assets-webpack-plugin&#39;);</span><br><span class="line">然后在module.exports下新增</span><br><span class="line">optimization:&#123;</span><br><span class="line">		minimizer:[</span><br><span class="line">			new OptimizeCss()</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">此时就可以压缩css文件了，但是还有一个问题，使用这个方式之后js不能压缩了，</span><br><span class="line">解决方法：</span><br><span class="line">安装npm install uglifyjs-webpack-plugin -D</span><br><span class="line">在配置文件引入 const UglifyJsPlugin&#x3D;require(&#39;uglifyjs-webpack-plugin&#39;)</span><br><span class="line">在minimizer下新增 new UglifyJsPlugin(&#123;</span><br><span class="line">	cache: true,&#x2F;&#x2F;是否缓存</span><br><span class="line">	parallel:true,&#x2F;&#x2F;是否并发处理</span><br><span class="line">	sourceMap: true</span><br><span class="line">&#125;),</span><br><span class="line">此时就可以一起压缩css和js文件了</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="bable-loader-把ES6转换成ES5"><a href="#bable-loader-把ES6转换成ES5" class="headerlink" title="bable-loader:把ES6转换成ES5"></a>bable-loader:把ES6转换成ES5</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">先npm init生成配置文件</span><br><span class="line">第一步：安装 npm install -D babel-loader @babel&#x2F;core @babel&#x2F;preset-env webpack</span><br><span class="line"></span><br><span class="line">第二步：配置webpack.config.js文件</span><br><span class="line">    module: &#123;</span><br><span class="line">      rules: [</span><br><span class="line">        &#123;</span><br><span class="line">          test: &#x2F;\.m?js$&#x2F;,</span><br><span class="line">          exclude: &#x2F;(node_modules|bower_components)&#x2F;,</span><br><span class="line">          use: &#123;</span><br><span class="line">            loader: &#39;babel-loader&#39;,</span><br><span class="line">            options: &#123;</span><br><span class="line">              presets: [&#39;@babel&#x2F;preset-env&#39;]</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">第三步：编写入口文件:就是ES6语法，如</span><br><span class="line">    async function sayHello() &#123;</span><br><span class="line">        const result &#x3D; await fetch(&#39;https:&#x2F;&#x2F;www.baidu.com&#39;);</span><br><span class="line">        console.log(result);</span><br><span class="line">    &#125;</span><br><span class="line">    sayHello();</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="打包sass"><a href="#打包sass" class="headerlink" title="打包sass"></a>打包sass</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、先安装 cnpm install sass-loader node-sass -D</span><br><span class="line">2、在再安装 cnpm install style.loader css-loader -D</span><br><span class="line">3、给配置文件里的rules添加</span><br><span class="line">&#123;</span><br><span class="line">		      test: &#x2F;\.scss$&#x2F;,</span><br><span class="line">		      use: [&#123;</span><br><span class="line">		          loader: &quot;style-loader&quot; &#x2F;&#x2F; 将 JS 字符串生成为 style 节点</span><br><span class="line">		      &#125;, &#123;</span><br><span class="line">		          loader: &quot;css-loader&quot; &#x2F;&#x2F; 将 CSS 转化成 CommonJS 模块</span><br><span class="line">		      &#125;, &#123;</span><br><span class="line">		          loader: &quot;sass-loader&quot; &#x2F;&#x2F; 将 Sass 编译成 CSS</span><br><span class="line">		      &#125;]</span><br><span class="line">&#125;</span><br><span class="line">4、新建一个scss文件并添加内容</span><br><span class="line">5、引入input.js</span><br><span class="line">6、打包webpack</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="MiniCssExtarctPlugin-把Sass文件单独打包到一个文件里去"><a href="#MiniCssExtarctPlugin-把Sass文件单独打包到一个文件里去" class="headerlink" title="MiniCssExtarctPlugin:把Sass文件单独打包到一个文件里去"></a>MiniCssExtarctPlugin:把Sass文件单独打包到一个文件里去</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、安装 npm install mini-css-extract-plugin -D</span><br><span class="line">2、在配置文件里引入 const MiniCssExtarctPlugin &#x3D; require(“mini-css-extract-plugin”);</span><br><span class="line">3、在module.exports &#x3D; 下添加</span><br><span class="line">plugins: [</span><br><span class="line">    new MiniCssExtractPlugin(&#123;</span><br><span class="line">      &#x2F;&#x2F; Options similar to the same options in webpackOptions.output</span><br><span class="line">      &#x2F;&#x2F; both options are optional</span><br><span class="line">      filename: &#39;[name].css&#39;,</span><br><span class="line">      chunkFilename: &#39;[id].css&#39;,</span><br><span class="line">    &#125;),</span><br><span class="line">  ],</span><br><span class="line">  </span><br><span class="line">4、在sass的rules下面的use的内容更换成</span><br><span class="line">  MiniCssExtarctPlugin.loader,</span><br><span class="line">  &quot;css-loader&quot;,</span><br><span class="line">  &quot;sass-loader&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="HtmlWebpackPlugin：打包html"><a href="#HtmlWebpackPlugin：打包html" class="headerlink" title="HtmlWebpackPlugin：打包html"></a>HtmlWebpackPlugin：打包html</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、安装  npm install html-webpack-plugin -D</span><br><span class="line">2、在plugin下添加</span><br><span class="line">	new HtmlWebpackPlugin( &#123;</span><br><span class="line">	      title: &#39;Hello&#39;,&#x2F;&#x2F;标题</span><br><span class="line">	      filename: &#39;index.html&#39;,&#x2F;&#x2F;输出文件</span><br><span class="line">	      template: &#39;template.html&#39;&#x2F;&#x2F;输入文件，需要自己创建</span><br><span class="line">	    &#125;)</span><br><span class="line">3、在template.html的title里添加 &lt;%&#x3D; htmlWebpackPlugin.options.title %&gt;&#x2F;&#x2F;自动更新到index.html</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="热替换"><a href="#热替换" class="headerlink" title="热替换"></a>热替换</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、安装 npm install  webpack-dev-server  -D</span><br><span class="line">2、在配置文件下添加 </span><br><span class="line">	devServer: &#123;</span><br><span class="line">		    contentBase: path.join(__dirname, &#39;dist&#39;),</span><br><span class="line">		    compress: true,</span><br><span class="line">		    port: 8080</span><br><span class="line">		  &#125;,</span><br><span class="line">3、在package.json的scripts下添加  &quot;start&quot;: &quot;webpack-dev-server&quot;</span><br><span class="line">4、执行npm run start</span><br><span class="line">5、浏览器打开用localhost:8080</span><br><span class="line"></span><br><span class="line">注意：启动热替换之后，自动创新只能在浏览器端看到对应的效果，此时并没有更新到输出文件的本地，如果想更新到输出文件的本地，需要退出热替换状态，执行webpack更新到本地</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>sql server复习</title>
+    <url>/2020/05/30/sql%20server%E5%A4%8D%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="SQL创建数据库"><a href="#SQL创建数据库" class="headerlink" title="SQL创建数据库"></a>SQL创建数据库</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CREATE DATABASE 数据库名</span><br><span class="line">ON PRIAMRY</span><br><span class="line">(</span><br><span class="line">NAME&#x3D;数据的逻辑名称,</span><br><span class="line">FILENAME&#x3D;&#39;存储的位置&#39;,</span><br><span class="line">SIZE&#x3D;5mb,</span><br><span class="line">MAXSIZE&#x3D;20MB,</span><br><span class="line">FILEGROWTH&#x3D;20%,</span><br><span class="line">)</span><br><span class="line">LOG ON</span><br><span class="line">(</span><br><span class="line">NAME&#x3D;日志文件的逻辑名称,</span><br><span class="line">FILENAME&#x3D;&#39;存储的位置&#39;,</span><br><span class="line">SIZE&#x3D;5mb,</span><br><span class="line">MAXSIZE&#x3D;20MB,</span><br><span class="line">FILEGROWTH&#x3D;20%,</span><br><span class="line">)</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h2 id="SQL查看数据库"><a href="#SQL查看数据库" class="headerlink" title="SQL查看数据库"></a>SQL查看数据库</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">EXEC sp_helpdb &#39;数据库名&#39;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="SQL增加数据库容量"><a href="#SQL增加数据库容量" class="headerlink" title="SQL增加数据库容量"></a>SQL增加数据库容量</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE 数据库名</span><br><span class="line">GO</span><br><span class="line">ALTER DATABASE 数据库名</span><br><span class="line">MODIFY FILE</span><br><span class="line">(</span><br><span class="line">NAME&#x3D;原数据量文件名,</span><br><span class="line">SIZE&#x3D;新增的容量,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="SQL创建表"><a href="#SQL创建表" class="headerlink" title="SQL创建表"></a>SQL创建表</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE student</span><br><span class="line">GO</span><br><span class="line">CERATE TABLE 班级</span><br><span class="line">（</span><br><span class="line">班级代码  varchar (9)  CONSTRAINT pk_bjdm PRIMARY KEY,</span><br><span class="line">班级名称  varchar (20) NOT NULL,</span><br><span class="line">专业代码  char (4) NOT NULL,</span><br><span class="line">系部代码  char (2) NOT NULL,</span><br><span class="line">备注  varchar(50)</span><br><span class="line">）</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="insert-SQL向表中添加数据"><a href="#insert-SQL向表中添加数据" class="headerlink" title="insert:SQL向表中添加数据"></a>insert:SQL向表中添加数据</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE student</span><br><span class="line">GO</span><br><span class="line">INSERT 班级 values (&#39;060102002&#39;,&#39;06&#39;,&#39;软件技术&#39;,&#39;0102&#39;,&#39;01&#39;,&#39;&#39;)</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="SQL查看表"><a href="#SQL查看表" class="headerlink" title="SQL查看表"></a>SQL查看表</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE student</span><br><span class="line">GO</span><br><span class="line">SELECT * from 班级</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="alter-为表-add-新增-一列"><a href="#alter-为表-add-新增-一列" class="headerlink" title="alter:为表(add:新增)一列"></a>alter:为表(add:新增)一列</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE student</span><br><span class="line">GO</span><br><span class="line">ALTER TABLE 学生</span><br><span class="line">ADD 家庭住址 varchar (30) NOT NULL</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="alter-alter修改-表中的某字段"><a href="#alter-alter修改-表中的某字段" class="headerlink" title="alter:(alter修改)表中的某字段"></a>alter:(alter修改)表中的某字段</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE student</span><br><span class="line">GO </span><br><span class="line">ALTER TABLE 学生</span><br><span class="line">ALTER COLUMN 家庭住址 varchar (50) NULL</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="alter-drop-删除-表中某个字段"><a href="#alter-drop-删除-表中某个字段" class="headerlink" title="alter:(drop:删除)表中某个字段"></a>alter:(drop:删除)表中某个字段</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use student</span><br><span class="line">go</span><br><span class="line">alter table 系部</span><br><span class="line">drop column 系主任</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="insert-SQL数据的添加"><a href="#insert-SQL数据的添加" class="headerlink" title="insert:SQL数据的添加"></a>insert:SQL数据的添加</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE student</span><br><span class="line">GO</span><br><span class="line">INSERT 系部		&#x2F;&#x2F;注意，如修改全部字段名，可以省略字段名</span><br><span class="line">（</span><br><span class="line">系部代码，系部名称，系主任</span><br><span class="line">）</span><br><span class="line">VALUES</span><br><span class="line">(&#39;01&#39;,&#39;计算机系&#39;,&#39;杨学全&#39;)</span><br><span class="line">GO</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="update-SQL数据的修改"><a href="#update-SQL数据的修改" class="headerlink" title="update:SQL数据的修改"></a>update:SQL数据的修改</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">USE student</span><br><span class="line">go</span><br><span class="line">update 教学计划</span><br><span class="line">set 开始周&#x3D;2</span><br><span class="line">where 专业代码&#x3D;‘001’</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="delete-SQL数据的删除"><a href="#delete-SQL数据的删除" class="headerlink" title="delete:SQL数据的删除"></a>delete:SQL数据的删除</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use student</span><br><span class="line">go</span><br><span class="line">delete from 系部</span><br><span class="line">where 系部代码&#x3D;&#39;04&#39;</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="查询姓名与年龄"><a href="#查询姓名与年龄" class="headerlink" title="查询姓名与年龄"></a>查询姓名与年龄</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use student</span><br><span class="line">go</span><br><span class="line">select 姓名,year(getdate())-year(出生日期) as 年龄</span><br><span class="line">from 学生</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="top-n-查询表中前三条记录"><a href="#top-n-查询表中前三条记录" class="headerlink" title="top n:查询表中前三条记录"></a>top n:查询表中前三条记录</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use student</span><br><span class="line">go</span><br><span class="line">select top 3 *</span><br><span class="line">from 课程注册</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="top-n-percent-查询表中前20-的记录-只找注册号-学号-课程号-教师编号"><a href="#top-n-percent-查询表中前20-的记录-只找注册号-学号-课程号-教师编号" class="headerlink" title="top n percent:查询表中前20%的记录(只找注册号 学号 课程号 教师编号)"></a>top n percent:查询表中前20%的记录(只找注册号 学号 课程号 教师编号)</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use student</span><br><span class="line">go</span><br><span class="line">select top 20 percent 注册号,课程号,教师编号</span><br><span class="line">from 课程注册</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="year-getdate-year-出生日期-lt-查询年龄小于或等于35岁的教师信息"><a href="#year-getdate-year-出生日期-lt-查询年龄小于或等于35岁的教师信息" class="headerlink" title="year(getdate())-year(出生日期)&lt;=:查询年龄小于或等于35岁的教师信息"></a>year(getdate())-year(出生日期)&lt;=:查询年龄小于或等于35岁的教师信息</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use student</span><br><span class="line">go</span><br><span class="line">select * from 教师</span><br><span class="line">where year(getdate())-year(出生日期),&lt;&#x3D;35</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="between-and-查询出生日期在1971-1980年的教师编号，姓名，出入日期"><a href="#between-and-查询出生日期在1971-1980年的教师编号，姓名，出入日期" class="headerlink" title="between  and:查询出生日期在1971-1980年的教师编号，姓名，出入日期"></a>between  and:查询出生日期在1971-1980年的教师编号，姓名，出入日期</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use student</span><br><span class="line">go</span><br><span class="line">select 编号,姓名,出生日期  from 教师</span><br><span class="line">where 出生日期 between &#39;1971-01-01&#39; and &#39;1980-12-31&#39;</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="in-查询计算机系，经济管理系的班级名称与班级编号"><a href="#in-查询计算机系，经济管理系的班级名称与班级编号" class="headerlink" title="in:查询计算机系，经济管理系的班级名称与班级编号"></a>in:查询计算机系，经济管理系的班级名称与班级编号</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use student</span><br><span class="line">go</span><br><span class="line">select 班级名称,班级编号</span><br><span class="line">from 班级</span><br><span class="line">where 系部代码 in(&#39;01&#39;,&#39;02&#39;)</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="like-查询姓刘学生的信息"><a href="#like-查询姓刘学生的信息" class="headerlink" title="like:查询姓刘学生的信息"></a>like:查询姓刘学生的信息</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use student</span><br><span class="line">go</span><br><span class="line">select * from 学生</span><br><span class="line">where 姓名 like &#39;刘%&#39;</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="between-and-and-多重条件查询：查询1971-1980年之间的女教师"><a href="#between-and-and-多重条件查询：查询1971-1980年之间的女教师" class="headerlink" title="between and and:多重条件查询：查询1971-1980年之间的女教师"></a>between and and:多重条件查询：查询1971-1980年之间的女教师</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use student</span><br><span class="line">go</span><br><span class="line">select * from 教师</span><br><span class="line">where 出生日期 between &#39;1970-01-01&#39; and &#39;1980-12-31&#39; and 性别&#x3D;&#39;女&#39;</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="count-查询学生总数"><a href="#count-查询学生总数" class="headerlink" title="count:查询学生总数"></a>count:查询学生总数</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use student</span><br><span class="line">go</span><br><span class="line">select count(*) as 总数 </span><br><span class="line">from 学生</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="avg-查询学生的平均年龄"><a href="#avg-查询学生的平均年龄" class="headerlink" title="avg:查询学生的平均年龄"></a>avg:查询学生的平均年龄</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use student</span><br><span class="line">go</span><br><span class="line">select avg(year(getdate())-year(出生日期)) as 平均年龄 from 学生</span><br><span class="line">go</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="约束的类型："><a href="#约束的类型：" class="headerlink" title="约束的类型："></a>约束的类型：</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">primary key:主键约束</span><br><span class="line">1.不允许为空，可以存在多个列，只有建一个主键</span><br><span class="line"></span><br><span class="line">unique：唯一约束</span><br><span class="line">1.允许出现一个空，可以建多个</span><br><span class="line"></span><br><span class="line">not null:非空约束</span><br><span class="line">1.用来强制实现数据的完整性，设立的列不允许为空</span><br><span class="line"></span><br><span class="line">check:检查约束</span><br><span class="line">1.用来强制实现数据的完整性，使用逻辑表达式来限定列中可以接受的数据范围</span><br><span class="line"></span><br><span class="line">default:默认约束</span><br><span class="line">1：用来强制实现数据的完整性，为表中某列建立一个默认值</span><br><span class="line"></span><br><span class="line">foreign key:外键约束</span><br><span class="line">1.通过外键可以为相关联的两个表建立联系，实现数据的完整性</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>数据结构期末复习</title>
+    <url>/2020/05/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="出栈操作"><a href="#出栈操作" class="headerlink" title="出栈操作"></a>出栈操作</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">char pop(SqlStack *S)&#123;</span><br><span class="line">    char x;</span><br><span class="line">    if(StackEmpty(s))&#123;</span><br><span class="line">    printf(&quot;下溢&quot;);</span><br><span class="line">    exit(0);</span><br><span class="line">    &#125;</span><br><span class="line">    x&#x3D;S-&gt;data[S-&gt;top];</span><br><span class="line">    S-&gt;top--;</span><br><span class="line">    return x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h3 id="一棵二叉树以二叉链表为存储结构，写出求此二叉树中叶子结点个数的算法。"><a href="#一棵二叉树以二叉链表为存储结构，写出求此二叉树中叶子结点个数的算法。" class="headerlink" title="一棵二叉树以二叉链表为存储结构，写出求此二叉树中叶子结点个数的算法。"></a>一棵二叉树以二叉链表为存储结构，写出求此二叉树中叶子结点个数的算法。</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int sum&#x3D;0;</span><br><span class="line">void leaft(BiTree T)&#123;</span><br><span class="line">	if(T)&#123;</span><br><span class="line">		if(T-&gt;lchild&#x3D;&#x3D;NULL &amp;&amp; T-&gt;rchild&#x3D;&#x3D;NULL)sum++;</span><br><span class="line">		leaft(T-&gt;lchild);</span><br><span class="line">		leaft(T-&gt;rchild);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="一棵二叉树以二叉链表为存储结构，写出求二叉树结点总数的算法"><a href="#一棵二叉树以二叉链表为存储结构，写出求二叉树结点总数的算法" class="headerlink" title="一棵二叉树以二叉链表为存储结构，写出求二叉树结点总数的算法"></a>一棵二叉树以二叉链表为存储结构，写出求二叉树结点总数的算法</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int sum&#x3D;0;</span><br><span class="line">void cound(BiTree root)&#123;</span><br><span class="line">    if(root)&#123;</span><br><span class="line">		sum++;</span><br><span class="line">		cound(root-&gt;lchild);</span><br><span class="line">		cound(root-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>我的第一篇博客文章</title>
+    <url>/2020/05/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">内容：</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">内容：</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+</search>
