@@ -622,14 +622,35 @@
   <entry>
     <title>我的第一篇博客文章</title>
     <url>/2020/05/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">内容：</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h3 id="我的第一个博客"><a href="#我的第一个博客" class="headerlink" title="我的第一个博客"></a>我的第一个博客</h3><h4 id="网上找的笔记"><a href="#网上找的笔记" class="headerlink" title="网上找的笔记"></a>网上找的笔记</h4><p>安装Nodejs<br>node -v #查看node版本<br>npm -v #查看npm版本<br>npm install -g cnpm –registry=<a href="http://registry.npm.taobao.org" target="_blank" rel="noopener">http://registry.npm.taobao.org</a> 安装淘宝的cnpm 管理器<br>cnpm -v #查看cnpm版本<br>cnpm install -g hexo-cli 安装hexo框架<br>hexo -v 查看hexo版本<br>mkdir blog 创建blog目录<br>cd blog 进入blog目录<br>sudo hexo init 生成博客 初始化博客<br>hexo s 启动本地博客服务<br><a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 本地访问地址<br>hexo n “我的第一篇文章” 创建新的文章<br>返回blog目录<br>hexo clean 清理<br>hexo g 生成<br>Github创建一个新的仓库 YourGithubName.github.io</p>
+<h6 id="cnpm-install-–save-hexo-deployer-git-在blog目录下安装git部署插件"><a href="#cnpm-install-–save-hexo-deployer-git-在blog目录下安装git部署插件" class="headerlink" title="cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件"></a>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件</h6><h6 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="#配置_config.yml"></a>#配置_config.yml</h6><h6 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h6><h6 id="Docs-https-hexo-io-docs-deployment-html"><a href="#Docs-https-hexo-io-docs-deployment-html" class="headerlink" title="Docs: https://hexo.io/docs/deployment.html"></a>Docs: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">https://hexo.io/docs/deployment.html</a></h6><p>deploy:<br>type: git<br>repo: <a href="https://github.com/YourGithubName/YourGithubName.github.io.git" target="_blank" rel="noopener">https://github.com/YourGithubName/YourGithubName.github.io.git</a></p>
+<h6 id="branch-master"><a href="#branch-master" class="headerlink" title="branch: master"></a>branch: master</h6><p>hexo d #部署到Github仓库里<br><a href="https://YourGithubName.github.io/" target="_blank" rel="noopener">https://YourGithubName.github.io/</a> #访问这个地址可以查看博客</p>
+<p>git clone <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia #下载yilia主题到本地</p>
+<p>#修改hexo根目录下的 _config.yml 文件 ： theme: yilia</p>
+<p>hexo c #清理一下<br>hexo g #生成<br>hexo d #部署到远程Github仓库<br><a href="https://YourGithubName.github.io/" target="_blank" rel="noopener">https://YourGithubName.github.io/</a> #查看博客</p>
+<h2 id="hexo主题网址：https-hexo-io-themes"><a href="#hexo主题网址：https-hexo-io-themes" class="headerlink" title="hexo主题网址：https://hexo.io/themes/"></a>hexo主题网址：<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></h2><h3 id="自己写的笔记"><a href="#自己写的笔记" class="headerlink" title="自己写的笔记"></a>自己写的笔记</h3><p>1、安装node.js</p>
+<p>2、用npm安装cnpm。    npm install -g cnpm –registry=<a href="http://registry.npm.taobao.org" target="_blank" rel="noopener">http://registry.npm.taobao.org</a></p>
+<p>3、全局安装hexo框架。    cnpm install -g hexo-cli</p>
+<p>4、在你想要的文件夹下运行  sudo hexo init。初始化博客</p>
+<p>5、运行博客hexo s。会生成一个<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 地址</p>
+<p>6、hexo n  “标题” 新建一个页面；</p>
+<p>注意：每新建一个页面，要运行之前先都需要先清理（hexo clean）、再生成（hexo g）、再运行（hexo s）：</p>
+<p>7、部署到自己的github上去，先在github新建一个项目，名字前缀必需要跟自己的账户名相同，</p>
+<p>如我的github账户名为<a href="https://github.com/huang-hhy" target="_blank" rel="noopener">huang-hhy</a>，新建的项目名字<a href="https://github.com/huang-hhy/huang-hhy.github.io" target="_blank" rel="noopener">huang-hhy.github.io</a></p>
+<p>8、安装git部署：cnpm install –save hexo-deployer-git </p>
+<p>9、修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">###### Deployment</span><br><span class="line">###### Docs: https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;deployment.html</span><br><span class="line"></span><br><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repo: https:&#x2F;&#x2F;github.com&#x2F;YourGithubName&#x2F;YourGithubName.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
 
+<p>10、hexo d提交到github上去，运行huang-hhy.github.io即可访问</p>
+<p>11、（1）修改主题：git clone <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia</p>
+<p>​        （2）git clone -b master <a href="https://github.com/jerryc127/hexo-theme-butterfly.git" target="_blank" rel="noopener">https://github.com/jerryc127/hexo-theme-butterfly.git</a> themes/Butterfly</p>
+<p>12、修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: https:&#x2F;&#x2F;hexo.io&#x2F;plugins&#x2F;</span><br><span class="line">## Themes: https:&#x2F;&#x2F;hexo.io&#x2F;themes&#x2F;</span><br><span class="line">theme: yilia</span><br></pre></td></tr></table></figure>
 
+<p>npm install hexo-renderer-pug hexo-renderer-stylus –save or yarn add hexo-renderer-pug hexo-renderer-stylus</p>
+<h3 id="yilia主题优化"><a href="#yilia主题优化" class="headerlink" title="yilia主题优化"></a>yilia主题优化</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">配置图片资源：</span><br><span class="line"></span><br><span class="line">   添加图片资源文件夹。 路径为 themes&#x2F;yilia&#x2F;source&#x2F;下，可添加一个 assets 文件夹，里面存放图片资源即可</span><br><span class="line"></span><br><span class="line">    配置文件中直接引用即可。路径为 themes&#x2F;yilia&#x2F;_config.yml，找到如下即可</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    # 微信二维码图片</span><br><span class="line"></span><br><span class="line">    weixin:  &#x2F;assets&#x2F;img&#x2F;wechat.png</span><br><span class="line"></span><br><span class="line">    # 头像图片</span><br><span class="line"></span><br><span class="line">    avatar:  &#x2F;assets&#x2F;img&#x2F;head.jpg</span><br><span class="line"></span><br><span class="line">    # 网页图标</span><br><span class="line"></span><br><span class="line">    favicon:  &#x2F;assets&#x2F;img&#x2F;head.jpg</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">文章如何显示摘要：</span><br><span class="line"></span><br><span class="line">    问题。点击主页时，发现所有文章都是全文显示，不利于查找，可控制显示的字数</span><br><span class="line"></span><br><span class="line">    解决办法。 在你 MD 格式文章正文插入 &lt;!-- more --&gt;即可，只会显示它之前的，此后的就不显示，点击文章标题，全文阅读才可看到，同时注释掉以下 themes&#x2F;yilia&#x2F;_config.yml里的  # excerpt_link: more</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">文章显示目录：</span><br><span class="line"></span><br><span class="line">	增加文章目录 TOC(table of content )，方便阅读文章, 在 themes&#x2F;yilia&#x2F;_config.ym中进行配置</span><br><span class="line">    toc: 2即可。</span><br></pre></td></tr></table></figure>
 
-
-
-<h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">内容：</span><br></pre></td></tr></table></figure>
-
+<p>menu:<br>  主页: / || fa fa-home<br>  档案: /archives/ || fa fa-archive<br>  标签: /tags/ || fa fa-tags<br>  分类目录: /categories/ || fa fa-folder-open<br>  链接: /link/ || fa fa-link<br>  关于: /about/ || fa fa-heart<br>  清单||fa fa-list:<br>    - Music || /music/ || fa fa-music<br>    - Movie || /movies/ || fa fa-film</p>
 ]]></content>
   </entry>
 </search>
