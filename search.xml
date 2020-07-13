@@ -823,4 +823,280 @@
 <p>后评价在项目完成之后，主要是对项目的总结；前期评估在项目初期，主要是对项目的预测<br>————————————————<br>版权声明：本文为CSDN博主「聆听–风雨」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/luchengtao11/article/details/72731026" target="_blank" rel="noopener">https://blog.csdn.net/luchengtao11/article/details/72731026</a></p>
 ]]></content>
   </entry>
+  <entry>
+    <title>JavaScript面试</title>
+    <url>/2020/07/13/JavaScript%E9%9D%A2%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="JavaScript面试"><a href="#JavaScript面试" class="headerlink" title="JavaScript面试"></a>JavaScript面试</h1><p>作者：luciferzero<br><a href="https://www.nowcoder.com/discuss/445566来源：牛客网" target="_blank" rel="noopener">https://www.nowcoder.com/discuss/445566来源：牛客网</a></p>
+<ol>
+<li><p>事件委托，怎么阻止事件冒泡          </p>
+</li>
+<li><p>怎么理解JS原型链          </p>
+</li>
+<li><p>怎么异步加载script脚本，defer和async的区别          </p>
+</li>
+<li><p>事件循环          </p>
+</li>
+<li><p>PureComponent          </p>
+</li>
+<li><p>高阶组件          </p>
+</li>
+<li><p>hooks          </p>
+</li>
+<li><p>你所了解的安全问题          </p>
+</li>
+<li><p>浏览器缓存          </p>
+</li>
+<li><p>HTTPS，SSL，TSL握手          </p>
+</li>
+<li><p>HTTP2.0</p>
+</li>
+</ol>
+<p>​    </p>
+<p> 1、           排序算法时间复杂度和稳定性比较     </p>
+<p>2、           tcp/ip协议几层，http在哪一层     </p>
+<p>3、           浏览器缓存     </p>
+<p>4、           cookie、session、localstorage     </p>
+<p>5、           settimeout、setinterval     </p>
+<p> 6、         跨域 </p>
+<p>7、          本地存储 </p>
+<h2 id="js语法"><a href="#js语法" class="headerlink" title="js语法"></a>js语法</h2><h4 id="js基本类型"><a href="#js基本类型" class="headerlink" title="js基本类型"></a>js基本类型</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">基本数据类型 ：String、Number、Boolean 、Null、Undefined、Symbol、BigInt ;</span><br><span class="line"></span><br><span class="line">引用数据类型：Object;</span><br><span class="line"></span><br><span class="line">其中 Symbol、BigInt 是新增的数据类型</span><br></pre></td></tr></table></figure>
+
+
+
+<p>js原型链，原型链优势 </p>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包:"></a>闭包:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">优点</span><br><span class="line"></span><br><span class="line">加强封装性,可以达到对变量的保护作用。</span><br><span class="line"></span><br><span class="line">缺点</span><br><span class="line"></span><br><span class="line">(1)  由于闭包内部变量优先级高于外部变量,所以多查找作用域链中的一个层次,就会在一定程度上影响查找速度。</span><br><span class="line"></span><br><span class="line">(2)  内存浪费,如下：</span><br><span class="line"></span><br><span class="line">闭包的特性</span><br><span class="line"></span><br><span class="line">    函数内再嵌套函数</span><br><span class="line">    内部函数可以引用外层的参数和变量</span><br><span class="line">    参数和变量不会被垃圾回收机制回收</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="有哪些方法判断变量的类型"><a href="#有哪些方法判断变量的类型" class="headerlink" title="有哪些方法判断变量的类型"></a>有哪些方法判断变量的类型</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">基本数据类型用typeof类获取</span><br><span class="line"></span><br><span class="line">如：</span><br><span class="line"></span><br><span class="line">    var num&#x3D;9;</span><br><span class="line">    console.log(typeof num);</span><br><span class="line"></span><br><span class="line">结果为number类型</span><br><span class="line">复杂数据类型object（是否是Array、Date类的实例）</span><br><span class="line"></span><br><span class="line">    var aNum&#x3D;[1,3];</span><br><span class="line">    console.log(aNum instanceof Array);</span><br><span class="line"></span><br><span class="line">结果为true</span><br><span class="line">借用toString方法;</span><br><span class="line"></span><br><span class="line">    Object.prototype.toString.call(ObjectTest) &#x3D;&#x3D;&#x3D; &#39;[object Function]&#39;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="循环语句有几种写法"><a href="#循环语句有几种写法" class="headerlink" title="循环语句有几种写法:"></a>循环语句有几种写法:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for - 循环代码块一定的次数</span><br><span class="line">for&#x2F;in - 循环遍历对象的属性</span><br><span class="line">while - 当指定的条件为 true 时循环指定的代码块</span><br><span class="line">while do 当指定的条件为 true 时循环指定的代码块</span><br><span class="line">forEach() 方法用于调用数组的每个元素，并将元素传递给回调函数。</span><br></pre></td></tr></table></figure>
+
+<p>字符串的截取的方法     </p>
+<p>es6新增的数组的方法—     </p>
+<p>遍历数组的方法     </p>
+<p>说说forEach方法     </p>
+<p>js:<br>1:闭包<br>2:垃圾回收机制<br>3:ajax的写法<br>4:处理跨域，同源策略，josnp<br>5:js的几种数据类型<br>6:js的几种数据类型的值<br>7:什么是堆，什么是栈<br>8:http状态码<br>9:判断一个对象是否是数组<br>10:简述箭头函数和普通函数的区别<br>11:一篇英文文章，找出它出现次数最多的前十个单词<br>12:一个字符串找出出现次数最多的字符<br>13:正则表达式如何匹配一个字符串是IP地址<br>14:事件捕获和冒泡<br>15:说一下你对原型与原型链的</p>
+<h4 id="call或apply"><a href="#call或apply" class="headerlink" title="call或apply"></a><code>call</code>或<code>apply</code></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">apply最多有2个参数,第一个参数是借用对象,第二个参数是数组类型。</span><br><span class="line"></span><br><span class="line">call第一个参数为借用对象,后面的参数个数不限,都作为参数传递给被借用方法。</span><br><span class="line"></span><br><span class="line">call和apply的用途:</span><br><span class="line"></span><br><span class="line">    改变this指向</span><br><span class="line">    Function.prototype.bind</span><br><span class="line">    借用其他对象的方法</span><br><span class="line"></span><br><span class="line">call方法</span><br><span class="line"></span><br><span class="line">    function callFn () &#123;</span><br><span class="line">      let aArg &#x3D; Array.prototype.slice.call(arguments, 0, 3);</span><br><span class="line">      return aArg;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(callFn(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;))</span><br><span class="line"></span><br><span class="line">输出结果：[ &#39;1&#39;, &#39;2&#39;, &#39;3&#39; ]</span><br><span class="line">apply方法</span><br><span class="line"></span><br><span class="line">    function applyFn () &#123;</span><br><span class="line">      let aArg &#x3D; Array.prototype.slice.apply(arguments, [0, 3]);</span><br><span class="line">      return aArg;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(applyFn(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;))</span><br><span class="line"></span><br><span class="line">输出结果：[ &#39;1&#39;, &#39;2&#39;, &#39;3&#39; ]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="JavaScript-的作用域与变量声明提升"><a href="#JavaScript-的作用域与变量声明提升" class="headerlink" title="JavaScript 的作用域与变量声明提升"></a>JavaScript 的作用域与变量声明提升</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">作用域</span><br><span class="line"></span><br><span class="line">    就是作用域里面套作用域；也就是闭包的机制；子集作用域可以访问父级作用域，父级不能访问子级；</span><br><span class="line"></span><br><span class="line">变量提升</span><br><span class="line"></span><br><span class="line">    作用域里面的带var的这些是该作用域的，如果没有某个变量直接到上一级查找；如果不在var声明，就直接变为上一级作用域的变量；</span><br><span class="line"></span><br><span class="line">javascript中一个名字(name)以四种方式进入作用域(scope)，其优先级顺序如下：</span><br><span class="line"></span><br><span class="line">    1、语言内置：所有的作用域中都有 this 和 arguments 关键字</span><br><span class="line">    2、形式参数：函数的参数在函数作用域中都是有效的</span><br><span class="line">    3、函数声明：形如function foo() &#123;&#125;</span><br><span class="line">    4、变量声明：形如var bar let aaa;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="JavaScript原型，原型链-有什么特点"><a href="#JavaScript原型，原型链-有什么特点" class="headerlink" title="JavaScript原型，原型链 ? 有什么特点"></a>JavaScript原型，原型链 ? 有什么特点</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">函数的原型，每个函数都有一个原型；</span><br><span class="line">   在JavaScript中,一共有两种类型的值,原始值和对象值.每个对象都有一个内部属性 prototype,我们通常称之为原型.</span><br><span class="line">        原型的值可以是一个对象,也可以是null.</span><br><span class="line">        如果它的值是一个对象,则这个对象也一定有自己的原型.</span><br><span class="line">        这样就形成了一条线性的链,我们称之为原型链.</span><br><span class="line">        访问一个对象的原型可以使用Object.getPrototypeOf方法,或者__proto__属性.</span><br><span class="line">    	原型向上查找的过程属于原型链；</span><br><span class="line"></span><br><span class="line">特点</span><br><span class="line"></span><br><span class="line">可以向上查找，不能向下查找</span><br><span class="line">        我们没有办法遍历到所有以某个对象为原型的对象,但我们可以向上遍历,获取到一个对象所有的上层原型,这个原型链必定是线性的,尽头是null；</span><br><span class="line">    	原型链的作用是用来实现继承的；</span><br><span class="line">        原型链的作用是用来实现继承,比如我们新建一个数组,数组的方法就是从数组的原型上继承而来的.</span><br><span class="line">        虽然我们都说原型链,但实际上,在不考虑网页中frame的情况,js引擎在执行期间的某一时刻,所有存在的对象		组成的是一棵原型树.默认情况下,只有一棵树.根节点可以说是Object.prototype,也可以说是null.</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="算法题"><a href="#算法题" class="headerlink" title="算法题"></a>算法题</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、可以传多个参数的函数</span><br><span class="line">function add(...value)&#123;</span><br><span class="line">				let sum&#x3D;0;</span><br><span class="line">				for(var val of value)&#123;</span><br><span class="line">					sum+&#x3D;val;</span><br><span class="line">				&#125;</span><br><span class="line">				return sum;</span><br><span class="line">			&#125;</span><br><span class="line">			console.log(add(2,5,3));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2、获取点击的当前值</span><br><span class="line">    var oInputs &#x3D; document.getElementsByTagName(&#39;input&#39;);</span><br><span class="line">    for (let index &#x3D; 0; index &lt; oInputs.length; index++) &#123;</span><br><span class="line">      (function (index) &#123;</span><br><span class="line">        oInputs[index].onclick &#x3D; function () &#123;</span><br><span class="line">          alert(index + 1)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)(index)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3、动态创建表格</span><br><span class="line">    &lt;div id&#x3D;&#39;table11&#39;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">      let row;</span><br><span class="line">      let cell;</span><br><span class="line">      for (let index &#x3D; 0; index &lt; 10; index++) &#123;</span><br><span class="line">        row &#x3D; document.createElement(&#39;tr&#39;);</span><br><span class="line">        document.getElementById(&#39;table11&#39;).appendChild(row);</span><br><span class="line">        for (let j &#x3D; 0; j &lt; 5; j++) &#123;</span><br><span class="line">          cell &#x3D; document.createElement(&#39;td&#39;);</span><br><span class="line">          cell.innerText &#x3D; &#39;内容&#39;;</span><br><span class="line">          row.appendChild(cell);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>CSS面试</title>
+    <url>/2020/07/13/CSS%E9%9D%A2%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="CSS面试题"><a href="#CSS面试题" class="headerlink" title="CSS面试题"></a>CSS面试题</h1><h4 id="css盒模型"><a href="#css盒模型" class="headerlink" title="css盒模型 :"></a>css盒模型 :</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">内容+padding+border+margin这个说一遍，然后话风一转，说如果在移动端，这个盒子模型就不是很适合做开发了，最好用box-sizing: border-box;属性改变一下盒子模型；</span><br></pre></td></tr></table></figure>
+
+<p>​    </p>
+<h4 id="CSS3的Flexbox（弹性盒布局模型）"><a href="#CSS3的Flexbox（弹性盒布局模型）" class="headerlink" title="CSS3的Flexbox（弹性盒布局模型）:"></a>CSS3的Flexbox（弹性盒布局模型）:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">以下6个属性设置在容器上（justify-content和align-items、flex-wrap:wrap最常用的）。</span><br><span class="line"></span><br><span class="line">    justify-content：定义了项目在主轴上的对齐方式。它可能取5个值</span><br><span class="line">        center： 居中</span><br><span class="line">        flex-start（默认值）：左对齐</span><br><span class="line">        flex-end：右对齐</span><br><span class="line">        space-between：两端对齐，项目之间的间隔都相等。</span><br><span class="line">        space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</span><br><span class="line">    align-items：属性定义项目在交叉轴上如何对齐。它可能取5个值。</span><br><span class="line">        center：交叉轴的中点对齐。</span><br><span class="line">        flex-start：交叉轴的起点对齐。</span><br><span class="line">        flex-end：交叉轴的终点对齐。</span><br><span class="line">        baseline: 项目的第一行文字的基线对齐。</span><br><span class="line">        stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。</span><br><span class="line">    flex-flow：flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。</span><br><span class="line">    flex-direction：属性决定主轴的方向（即项目的排列方向）；</span><br><span class="line">        row（默认值）：主轴为水平方向，起点在左端。</span><br><span class="line">        row-reverse：主轴为水平方向，起点在右端。</span><br><span class="line">        column：主轴为垂直方向，起点在上沿。</span><br><span class="line">        column-reverse：主轴为垂直方向，起点在下沿。</span><br><span class="line">    flex-wrap：默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。</span><br><span class="line">        它可能取三个值。</span><br><span class="line">        （1）nowrap（默认）：不换行。</span><br><span class="line">        （2）wrap：换行，第一行在上方。【这个属性经常用】</span><br><span class="line">        （3）wrap-reverse：换行，第一行在下方。</span><br><span class="line">    align-content：属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用</span><br><span class="line">        flex-start：与交叉轴的起点对齐。</span><br><span class="line">        flex-end：与交叉轴的终点对齐。</span><br><span class="line">        center：与交叉轴的中点对齐。</span><br><span class="line">        space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。</span><br><span class="line">        space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</span><br><span class="line">        stretch（默认值）：轴线占满整个交叉轴。</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="css选择器优先级"><a href="#css选择器优先级" class="headerlink" title="css选择器优先级 :"></a>css选择器优先级 :</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(1）、优先级就近原则，样式定义最近者为准;</span><br><span class="line"></span><br><span class="line">(2）、载入样式以最后载入的定位为准;</span><br><span class="line"></span><br><span class="line">优先级为: 从样式选择器看权重优先级：important &gt; 内嵌样式 &gt; ID &gt; 类 &gt; 标签 | 伪类 | 属性选择 &gt; 伪对象 &gt; 继承 &gt; 通配符；</span><br><span class="line"></span><br><span class="line">应用规则：</span><br><span class="line">1、如果样式上加有!important标记</span><br><span class="line">2、匹配的内容按照CSS权重排序，权重大的优先</span><br><span class="line">3、如果权重也一样，按照它在CSS样式表里声明的顺序，后声明的优先</span><br><span class="line"></span><br><span class="line">important 比 内联优先级高，但内敛比id要高；</span><br><span class="line"></span><br><span class="line">CSS定义的权重</span><br><span class="line"></span><br><span class="line">    第一等：代表内联样式，如: style&#x3D;””，权值为1000。</span><br><span class="line">    第二等：代表ID选择器，如：#content，权值为100。</span><br><span class="line">    第三等：代表类，伪类和属性选择器，如.content，权值为10。</span><br><span class="line">    第四等：代表类型选择器和伪元素选择器，如div p，权值为1。</span><br><span class="line"></span><br><span class="line">最后把这些值加起来，再就是当前元素的权重了。</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="css选择器"><a href="#css选择器" class="headerlink" title="css选择器:"></a>css选择器:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">id选择器（ # myid）</span><br><span class="line">类选择器（.myclassname）</span><br><span class="line">标签选择器（div, h1, p）</span><br><span class="line">相邻选择器（h1 + p）</span><br><span class="line">子选择器（ul &lt; li）</span><br><span class="line">后代选择器（li a）</span><br><span class="line">通配符选择器（ * ）</span><br><span class="line">属性选择器（a[rel &#x3D; ”external”]）</span><br><span class="line">伪类选择器（a: hover, li: nth - child）</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="css3特性"><a href="#css3特性" class="headerlink" title="css3特性:"></a>css3特性:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CSS3实现圆角（border-radius），阴影（box-shadow），</span><br><span class="line"></span><br><span class="line">对文字加特效（text-shadow、），线性渐变（gradient），旋转（transform）</span><br><span class="line"></span><br><span class="line">transform:rotate(9deg) scale(0.85,0.90) translate(0px,-30px) skew(-9deg,0deg);&#x2F;&#x2F; 旋转,	</span><br><span class="line">缩放,定位,倾斜</span><br><span class="line"></span><br><span class="line">增加了更多的CSS选择器  多背景 rgba </span><br><span class="line"></span><br><span class="line">在CSS3中唯一引入的伪元素是 ::selection.</span><br><span class="line"></span><br><span class="line">媒体查询，多栏布局</span><br><span class="line"></span><br><span class="line">border-image</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="CSS旋转属性怎么用？transform-有哪些用法"><a href="#CSS旋转属性怎么用？transform-有哪些用法" class="headerlink" title="CSS旋转属性怎么用？transform 有哪些用法:"></a>CSS旋转属性怎么用？transform 有哪些用法:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">一.旋转 rotate</span><br><span class="line">二.缩放 scale</span><br><span class="line">三.移动 translate</span><br><span class="line">四.倾斜 skew;</span><br><span class="line">五.基准点 transform-origin</span><br><span class="line"></span><br><span class="line">用法：transform: rotate(45deg) scale(0.5) skew(30deg, 30deg) translate(100px, 100px);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="脱离文档流有两种方式，浮动和定位"><a href="#脱离文档流有两种方式，浮动和定位" class="headerlink" title="脱离文档流有两种方式，浮动和定位:"></a>脱离文档流有两种方式，浮动和定位:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">第一种:定位</span><br><span class="line"></span><br><span class="line">    position:absolute</span><br><span class="line">    position:fixed</span><br><span class="line"></span><br><span class="line">第二种:浮动</span><br><span class="line"></span><br><span class="line">float也脱离文档流；</span><br><span class="line"></span><br><span class="line">    float:left</span><br><span class="line">    float:right</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="css垂直居中"><a href="#css垂直居中" class="headerlink" title="css垂直居中  :"></a>css垂直居中  :</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">方法一：宽高固定</span><br><span class="line"></span><br><span class="line">如果元素的宽高固定,那么,css指定样式为 top:50%;left:50%;</span><br><span class="line"></span><br><span class="line">而 margin-top 和 margin-left 指定为负数，绝对值为自身宽高的一半 ；</span><br><span class="line">方法二：有宽度</span><br><span class="line"></span><br><span class="line">可以使用margin:0 auto;可以实现居中（需要有宽度）</span><br><span class="line"></span><br><span class="line">    div&#123;</span><br><span class="line">        width:200px;</span><br><span class="line">        margin:0 auto;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">居中一个浮动元素</span><br><span class="line"></span><br><span class="line">如何居中一个浮动元素？父元素和子元素同时左浮动，然后父元素相对左移动50%，再然后子元素相对右移动50%，或者子元素相对左移动-50%也就可以了。</span><br><span class="line"></span><br><span class="line">具体就是确定容器的宽高 宽500 高 300 的层,设置层的外边距</span><br><span class="line"></span><br><span class="line">    .div &#123;</span><br><span class="line">      width:500px ; height:300px;&#x2F;&#x2F;高度可以不设</span><br><span class="line">      margin: -150px 0 0 -250px;</span><br><span class="line">      position:relative;         &#x2F;&#x2F;相对定位</span><br><span class="line">      background-color:pink;     &#x2F;&#x2F;方便看效果</span><br><span class="line">      left:50%;</span><br><span class="line">      top:50%;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">让绝对定位的div居中</span><br><span class="line"></span><br><span class="line">如何让绝对定位的div居中？</span><br><span class="line"></span><br><span class="line">先把外层的相对定位的大div用margin:0px auto;居中，</span><br><span class="line"></span><br><span class="line">然后这个绝对定位的用left，top来定位。</span><br><span class="line"></span><br><span class="line">top属性值:（父元素的高度-子元素高度）&#x2F;2；</span><br><span class="line"></span><br><span class="line">left属性值:（父元素宽度值-子元素宽度值）&#x2F;2。</span><br><span class="line"></span><br><span class="line">    position: absolute;</span><br><span class="line">    width: 1200px;</span><br><span class="line">    background: none;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">    top: 0;</span><br><span class="line">    left: 0;</span><br><span class="line">    bottom: 0;</span><br><span class="line">    right: 0;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="三栏布局，中间自适应"><a href="#三栏布局，中间自适应" class="headerlink" title="三栏布局，中间自适应:"></a>三栏布局，中间自适应:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、绝对定位法</span><br><span class="line"></span><br><span class="line">这或许是三种方法里最直观，最容易理解的：左右两栏采用绝对定位，分别固定于页面的左右两侧，</span><br><span class="line"></span><br><span class="line">中间的主体栏用左右margin值撑开距离。于是实现了三栏自适应布局。</span><br><span class="line"></span><br><span class="line">2、自身浮动法</span><br><span class="line"></span><br><span class="line">此方法代码最简单。应用了标签浮动跟随的特性。左栏左浮动，右栏右浮动，主体直接放后面，就实现了自适应。</span><br><span class="line"></span><br><span class="line">3、margin负值法</span><br><span class="line"></span><br><span class="line">这种方法是在实际的网站中应用的最多的，我个人感觉多少有些跟风的嫌疑。此方法很难用一句话概括。首先，中间的主体要使用双层标签。</span><br><span class="line"></span><br><span class="line">外层div宽度100%显示，并且浮动（本例左浮动，下面所述依次为基础），内层div为真正的主体内容，含有左右210像素的margin值。</span><br><span class="line"></span><br><span class="line">左栏与右栏都是采用margin负值定位的，左栏左浮动，margin-left为-100%，由于前面的div宽度100%与浏览器，所以这里的-100%margin值正好使左栏div定位到了页面的左侧； 右侧栏也是左浮动，其margin-left也是负值，大小为其本身的宽度即200像素。</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="CSS-中用于隐藏元素的两个属性"><a href="#CSS-中用于隐藏元素的两个属性" class="headerlink" title="CSS 中用于隐藏元素的两个属性:"></a>CSS 中用于隐藏元素的两个属性:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">目前，我所知道的不同有三点（欢迎补充）：空间占据、回流与渲染、株连性</span><br><span class="line"></span><br><span class="line">display:none；隐藏后的元素不占据任何空间，有株连性，父级设置none，子元素就显示不出来了，回引起渲染与回流，影响性能。</span><br><span class="line"></span><br><span class="line">visibility:hidden；隐藏的元素空间依旧存在；伪株连性，父级设计hidden，子元素默认不现实，但是可以用过visibility:visible 显示出子元素，无渲染与回流。</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="position属性"><a href="#position属性" class="headerlink" title="position属性  :"></a>position属性  :</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">默认：static</span><br><span class="line"></span><br><span class="line">相对定位：relative</span><br><span class="line"></span><br><span class="line">绝对定位：absolute（注意&#96;z-index&#96;）</span><br><span class="line"></span><br><span class="line">固定定位：fixed</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="display-显示状态有"><a href="#display-显示状态有" class="headerlink" title="display 显示状态有:"></a>display 显示状态有:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">none  隐藏，此元素不会被显示。</span><br><span class="line"></span><br><span class="line">block 块显示；此元素将显示为块级元素，此元素前后会带有换行符。</span><br><span class="line"></span><br><span class="line">inline 内嵌 ，默认。此元素会被显示为内联元素，元素前后没有换行符。</span><br><span class="line"></span><br><span class="line">table 表格显示，此元素会作为块级表格来显示（类似 &lt;table&gt;），表格前后带有换行符。</span><br><span class="line"></span><br><span class="line">inline-block：元素既具有 block 元素可以设置宽高的特性，同时又具有 inline 元素默认不换行的特性。</span><br><span class="line"></span><br><span class="line">list-item:象块类型元素一样显示，并添加样式列表标记。</span><br><span class="line"></span><br><span class="line">inherit 规定应该从父元素继承 display 属性的值</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="margin的上下左右四个数值？什么原理？"><a href="#margin的上下左右四个数值？什么原理？" class="headerlink" title="margin的上下左右四个数值？什么原理？"></a>margin的上下左右四个数值？什么原理？</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">margin属性的四个值，总是按照上，右，下，左的顺序</span><br><span class="line"></span><br><span class="line">如果有三个值，那左右相同（左取的是第二个值）</span><br><span class="line"></span><br><span class="line">如果有两个值，那上下相同，左右相同（下取上，左取右）</span><br><span class="line"></span><br><span class="line">如果有一个值，那四面相同（右取上，下取上，右取左）</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="浮动对父级元素产生什么影响及清除浮动-："><a href="#浮动对父级元素产生什么影响及清除浮动-：" class="headerlink" title="浮动对父级元素产生什么影响及清除浮动 ："></a>浮动对父级元素产生什么影响及清除浮动 ：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">浮动元素引起的问题</span><br><span class="line"></span><br><span class="line">    父元素的高度无法被撑开，影响与父元素同级的元素</span><br><span class="line">    与浮动元素同级的非浮动元素会跟随其后</span><br><span class="line">    若非第一个元素浮动，则该元素之前的元素也需要浮动，否则会影响页面显示的结构</span><br><span class="line"></span><br><span class="line">清除浮动的几种方法</span><br><span class="line">1、额外标签法</span><br><span class="line"></span><br><span class="line">&lt;div style&#x3D;&quot;clear:both;&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">缺点：不过这个办法会增加额外的标签使HTML结构看起来不够简洁。</span><br><span class="line"></span><br><span class="line">2、使用after伪元素</span><br><span class="line"></span><br><span class="line">    #parent:after&#123;</span><br><span class="line">        content : &quot;.&quot;;</span><br><span class="line">        height : 0;</span><br><span class="line">        visibility : hidden;</span><br><span class="line">        display : block;</span><br><span class="line">        clear : both;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">3、父元素也设置浮动</span><br><span class="line">缺点：使得与父元素相邻的元素的布局会受到影响，不可能一直浮动到body，不推荐使用 </span><br><span class="line"></span><br><span class="line">4、设置 overflow 为 hidden 或者 auto</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="多行文本溢出省略—"><a href="#多行文本溢出省略—" class="headerlink" title="多行文本溢出省略—"></a>多行文本溢出省略—</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">单行文本的溢出显示省略号</span><br><span class="line">overflow: hidden;</span><br><span class="line">text-overflow:ellipsis;</span><br><span class="line">white-space: nowrap;</span><br><span class="line"></span><br><span class="line">多行文本的溢出显示省略号</span><br><span class="line">display: -webkit-box;</span><br><span class="line">-webkit-box-orient: vertical;</span><br><span class="line">-webkit-line-clamp: 3;&#x2F;&#x2F;这里是第几行有省略号</span><br><span class="line">overflow: hidden;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="块级元素-行内元素-行内块元素："><a href="#块级元素-行内元素-行内块元素：" class="headerlink" title="块级元素 行内元素 行内块元素："></a>块级元素 行内元素 行内块元素：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">块级元素有以下特点：</span><br><span class="line"></span><br><span class="line">    每个块级元素都是独自占一行。 </span><br><span class="line">    元素的高度、宽度、行高和边距都是可以设置的。　　 </span><br><span class="line">    元素的宽度如果不设置的话，默认为父元素的宽度（父元素宽度100%）。</span><br><span class="line">    如：h1~h6、ul、ol、div、table等等</span><br><span class="line"></span><br><span class="line">行内元素有以下特点： </span><br><span class="line"></span><br><span class="line">    每一个行内元素可以和别的行内元素共享一行，相邻的行内元素会排列在同一行里，直到一行排不下了，才会换行。 </span><br><span class="line">    行内元素的高度、宽度、行高及顶部和底部边距不可设置。 </span><br><span class="line">    元素的宽度就是它包含的文字或图片的宽度，不可改变。</span><br><span class="line">    如：a、i、img、input、p等等</span><br><span class="line"></span><br><span class="line">行内块具体特点如下：</span><br><span class="line"></span><br><span class="line">    和其他行内或行内块级元素元素放置在同一行上；</span><br><span class="line">    元素的高度、宽度、行高以及顶和底边距都可设置。</span><br><span class="line">    如：input img</span><br><span class="line"></span><br><span class="line">元素类型转换display</span><br><span class="line"></span><br><span class="line">display：block ，定义元素为块级元素</span><br><span class="line"></span><br><span class="line">display :  inline ，定义元素为行内元素</span><br><span class="line"></span><br><span class="line">display：inline-block，定义元素为行内块级元素。</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="css如何画一个三角形"><a href="#css如何画一个三角形" class="headerlink" title="css如何画一个三角形:"></a>css如何画一个三角形:</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">width: 0;</span><br><span class="line">height: 0;</span><br><span class="line">border-top:50px solid transparent;</span><br><span class="line">border-left: 50px solid transparent;</span><br><span class="line">border-right: 50px solid transparent;</span><br><span class="line">border-bottom: 50px solid red;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>:页面性能如何优化，合并图片，减少网络的请求</p>
+<p>:雪碧图如何使用</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>IT项目期末复习</title>
+    <url>/2020/07/10/IT%E9%A1%B9%E7%9B%AE%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/</url>
+    <content><![CDATA[<h3 id="一、简答题类型"><a href="#一、简答题类型" class="headerlink" title="一、简答题类型"></a>一、简答题类型</h3><p>1．（3分）IT项目的利益相关者有哪些？<br>答：政府，投资方，债权人，客户，员工，供应商</p>
+<p>2.（3分）国际上主要的项目管理知识体系的两大认证书是什么？<br>答：认证PMP证书和认证IPMP证书。</p>
+<p>3.（3分）目标必须符合SMART原则的含义是：（3分）<br>答：明确、可行、具体和可以度量。</p>
+<p>4.（3分）IT项目成本管理由哪些过程组成？（3分）<br>答： 资源计划、成本估算、成本预算、成本控制、工作总结。</p>
+<p>（3分）什么是成本估算和成本预算？<br>答：成本估算：计算完成项目所需各种资源成本的近似值<br>成本预算：包括分配给每一独立工作的全部费用，以获得度量项目执行的费用</p>
+<h3 id="二、选择题类型"><a href="#二、选择题类型" class="headerlink" title="二、选择题类型"></a>二、选择题类型</h3><p>   1.下面那一项不是主要属于项目管理基本特性？（   D  ）<br>        A. 明确的目标<br>        B. 独特性<br>        C. 时限性<br>        D. 人员休息</p>
+<ol start="2">
+<li><p>IT项目涉及的因素较多，管理也较复杂，但不表现在以下那个方面。（  C ）<br>A．目标的渐进性<br>B．创新性<br>C．风险无法评估性<br>D．智力密集型</p>
+<ol start="3">
+<li>下面那一项不属于对IT项目环境的影响？（ D  ）<br>A．经济环境对IT项目的影响<br>B．社会人文、政策法律对IT项目的影响<br>C．企业文化对IT项目的影响<br>D. 项目启动前，辞职人员对IT项目环境的影响</li>
+</ol>
+</li>
+<li><p>项目立项启动准备过程，下面那个制度不在项目管理制度之列？（ C  ）<br>A. 项目考核管理制度<br>B. 项目费用管理制度和项目例会管理制度<br>C. 交通管理制度?<br>D. 项目通报制度。</p>
+</li>
+<li><p>下面那一项不属于编制范围规划的依据？（ B  ）<br>A. 环境因素和组织过程资产<br>B. 退休人员管理<br>C. 项目章程<br>D. 项目初步范围说明书</p>
+</li>
+<li><p>下列哪项不属于IT项目时间管理的特点？（  C ）<br>A. 时间管理是一个动态过程<br>B. 项目进度计划和控制是一个复杂的系统工程<br>C. 库房里的设备管理制度<br>D. 时间管理风险性大和时间管理有明显的阶段性</p>
+</li>
+<li><p>下面那一条不属于IT项目成本特点？（  C ）<br>A. 人工成本高，维护成本高且较难确定<br>B. 直接成本低，间接成本高。<br>C. 使用一般设备<br>D. 成本变动频繁，风险成本高。</p>
+</li>
+<li><p>常见的IT项目质量问题不包含下面那一条？（  D  ）<br> A. 违背IT项目规律<br> B. 技术方案本身的缺陷<br> C. 基本部件不合格, 实施中的管理问题<br> D. 个别人员离职<br> 9.IT项目的人力资源管理不包括下面那一条？（  A ）<br> A．人员设备的适当配置<br> B．项目组织规划和人员的获得与配备<br> C．项目组织成员的开发<br> D．项目团队建设与管理</p>
+<p>10.项目沟通的准则不包含下面那一条？（  D ）<br>准确和及时<br>?  B. 完整<br>?  C. 有效<br>正在实施</p>
+</li>
+</ol>
+<h3 id="三、填空题类型"><a href="#三、填空题类型" class="headerlink" title="三、填空题类型"></a>三、填空题类型</h3><ol>
+<li><p>PMBOK把项目管理过程组分为<strong><em>5__</em></strong>类。</p>
+</li>
+<li><p>项目生命周期中的重要概念包括：  检查点和<strong><strong><em>里程碑___</em></strong></strong>。</p>
+</li>
+<li><p>项目可行性研究的主要内容包括：<br>技术可行性分析、经济可行性、运行环境可行性和__    可行性研究报告<strong>_____</strong>。</p>
+<h6 id="4、IT项目范围变更控制的作用包括：合理调整项目范围、纠偏行动和"><a href="#4、IT项目范围变更控制的作用包括：合理调整项目范围、纠偏行动和" class="headerlink" title="4、IT项目范围变更控制的作用包括：合理调整项目范围、纠偏行动和"></a>4、IT项目范围变更控制的作用包括：合理调整项目范围、纠偏行动和</h6><p>​    <strong><em>总结经验教训_____</em></strong>。</p>
+</li>
+<li><p>IT项目资源分类包括：项目环境资源、可重用资源和<strong><strong>人力资源__</strong></strong><br> <strong><strong>__</strong></strong>。</p>
+</li>
+</ol>
+<h3 id="四、判断题类型"><a href="#四、判断题类型" class="headerlink" title="四、判断题类型"></a>四、判断题类型</h3><p>1.项目计划管理制度：明确各级项目计划的制订、检查流程，如整体计划、阶段计划、周计划。（ √ ）</p>
+<ol start="2">
+<li>收集项目需求主要包含（ √ ）<br>（1）收集需求的依据<br>（2）收集需求的工具与技术</li>
+<li>项目进度安排只是分析计划活动顺序、但不分析计划活动持续时间、资源要求和进度制约因素，不制订项目进度表的过程。（× ）</li>
+<li>IT项目成本特点：（×  ）<br>（1）人工成本不高。<br>（2）直接成本高，间接成本低。<br>（3）维护成本低且较容易确定。<br>（4）成本变动不大，风险成本低。</li>
+<li>质量是反映实体（产品、过程或活动等）满足明确和隐含的需要能力及特性的总和。（  √）</li>
+<li>有效沟通的原则是：（ √ ）<br>（1）尽早沟通<br>（2）主动沟通<br>（3）内外有别<br>（4）采用对方能接受的沟通风格<br>（5）沟通升级原则</li>
+<li>风险是指在一定条件下和一定时期内可能发生的各种结果的变化程度。（ √ ）</li>
+<li>IT项目的采购必须满足两个基本要求。（ √  ）<br>（1）符合技术与质量要求。<br>（2）经济性。</li>
+</ol>
+<h3 id="五、问答题类型"><a href="#五、问答题类型" class="headerlink" title="五、问答题类型"></a>五、问答题类型</h3><p>1．信息技术是以什么为基础进行开发的项目，如电子商务、企业信息化、数字城市、物联网应用等等。它本身是           项目，具备一般项目的基本特征。<br>    答：计算机、通讯、网络、微电子等</p>
+<p>2.IT项目的调研方法有哪些？<br>答：现有及历史资料收集、调查问卷、用户访问、实地考察、委托专业公司、专家咨询等。</p>
+<p>3.WBS的设计方法有哪几种？<br>    答：类比法、自上而下法、自下而上法</p>
+<ol start="4">
+<li>IT项目成本管理由哪些过程组成？<br>答：资源计划、成本估算、成本预算、成本控制、工作总结</li>
+</ol>
+<p>5.项目的质量责任有哪些？<br>答：项目经理对项目的质量负责。<br>       执行任务的具体员工负根本责任。</p>
+<ol start="6">
+<li>CMM有哪五个等级？<br>答：初始级 、可重复级、已定义级 、已管理级、优化级</li>
+</ol>
+<h3 id="六、论述题类型"><a href="#六、论述题类型" class="headerlink" title="六、论述题类型"></a>六、论述题类型</h3><p>1.解释项目沟通管理过程的单向沟通与双向沟通<br>答：<br>单向沟通是指发送者和接受者两者之间的地位不变（单向传递），一方只发送信息，另一方只接受信息。<br>双向沟通中，发送者和接受者两者之间的位置不断交换，且发送者是以协商和讨论的姿态面对接受者，信息发出以后还需及时听取反馈意见，必要时双方可进行多次重复商谈，直到双方共同</p>
+<p>明确和满意为止。</p>
+<p>2.谈谈项目风险管理过程与作用。<br>答：有效的风险管理可以提高项目的成功率。<br>?  提前对风险制定对策，就可以在风险发生时迅速做出反应，避免忙中出错造成更大损失。<br>风险管理可以增加团队的健壮性。<br>?  有效的风险管理可以帮助项目经理抓住工作重点，将主要精力集中于重大风险，将工作方式从被动救火转变为主动防范。</p>
+<p>一、名词解释<br>1．答：政府，投资方，债权人，客户，员工，供应商<br>2. 答：认证PMP证书和认证IPMP证书。<br>3. 答：明确、可行、具体和可以度量。<br>4. 答：资源计划、成本估算、成本预算、成本控制、工作总结。<br>5. 答：成本估算：计算完成项目所需各种资源成本的近似值<br>成本预算：包括分配给每一独立工作的全部费用，以获得度量项目执行的费用</p>
+<p>二、选择题<br>1．（D）、  2．（C）、 3．（D）4.（C） 5.（B） 6.（C） 7.（C） 8.（D）9.（A） 10.（D）<br>三、填空题<br>1．5  2. 里程碑 3. 可行性研究报告 4. 总结经验教训 5. 人力资源<br>四、判断题（要求：正确打√，错误打×）（本题共8小题，每小题1分，共8分）<br>1．（√）、 2．（√）、 3．（×）、 4．（×）5.（√）6. （√）7.（√）8. （√）<br>五、问答题<br>1．（6分）<br>答：计算机、通讯、网络、微电子等<br>2.（7分）<br>答：现有及历史资料收集、调查问卷、用户访问、实地考察、委托专业公司、专家咨询等。<br>3.（7分）<br>答：类比法、自上而下法、自下而上法<br>4.（7分）<br>答：资源计划、成本估算、成本预算、成本控制、工作总结</p>
+<p>5.（6分）<br>答：项目经理对项目的质量负责。<br>执行任务的具体员工负根本责任。<br>（4分）<br>答：初始级 、可重复级、已定义级 、已管理级、优化级</p>
+<p>六、论述题<br>1．（6分）<br>解：单向沟通是指发送者和接受者两者之间的地位不变（单向传递），一方只发送信息，另一方只接受信息。<br>双向沟通中，发送者和接受者两者之间的位置不断交换，且发送者是以协商和讨论的姿态面对接受者，信息发出以后还需及时听取反馈意见，必要时双方可进行多次重复商谈，直到双方共同</p>
+<p>明确和满意为止。</p>
+<p>2．（12分）<br>解：有效的风险管理可以提高项目的成功率。<br>?  提前对风险制定对策，就可以在风险发生时迅速做出反应，避免忙中出错造成更大损失。<br>风险管理可以增加团队的健壮性。<br>?  有效的风险管理可以帮助项目经理抓住工作重点，将主要精力集中于重大风险，将工作方式从被动救火转变为主动防范。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>软件测试技术期末复习资源</title>
+    <url>/2020/07/11/%E8%BD%AF%E4%BB%B6%E6%B5%8B%E8%AF%95%E6%8A%80%E6%9C%AF%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0%E8%B5%84%E6%BA%90/</url>
+    <content><![CDATA[<h4 id="1、逻辑覆盖6种方法的定义（重点内容）"><a href="#1、逻辑覆盖6种方法的定义（重点内容）" class="headerlink" title="1、逻辑覆盖6种方法的定义（重点内容）"></a>1、逻辑覆盖6种方法的定义（重点内容）</h4><p>语句覆盖：设计足够多的测试用例，使得测试程序中的每条可执行语句至少被执行一次。</p>
+<p>判定覆盖：设计足够多的测试用例，使得测试程序中的每个判断的真假都执行一次。</p>
+<p>条件覆盖：设计足够多的测试用例，使得测试程序中的每个判断语句中的每个逻辑条件的可能值至少被执行一次。</p>
+<p>判定/条件覆盖：设计足够多的测试用例，使得测试程序中的每个判断本身的判定结果至少满足一次，同时，每个                            逻辑条件的可能值也至少被满足一次。</p>
+<p>条件组合覆盖：设计足够多的测试用例，使得测试程序中的每个判断的所有可能条件组合至少被满足一次。</p>
+<p>路径覆盖：设计足够多的测试用例，使得测试程序中的每条路径至少被覆盖一次。</p>
+<h4 id="2、逻辑覆盖有哪6种方法（重点内容）"><a href="#2、逻辑覆盖有哪6种方法（重点内容）" class="headerlink" title="2、逻辑覆盖有哪6种方法（重点内容）"></a>2、逻辑覆盖有哪6种方法（重点内容）</h4><p>语句覆盖、判定覆盖、条件覆盖、判定/条件覆盖、条件组合覆盖、路径覆盖</p>
+<h4 id="3、6种覆盖方法之间的关系（比如：满足某个覆盖标准，是否一定能满足其他覆盖的标准）"><a href="#3、6种覆盖方法之间的关系（比如：满足某个覆盖标准，是否一定能满足其他覆盖的标准）" class="headerlink" title="3、6种覆盖方法之间的关系（比如：满足某个覆盖标准，是否一定能满足其他覆盖的标准）"></a>3、6种覆盖方法之间的关系（比如：满足某个覆盖标准，是否一定能满足其他覆盖的标准）</h4><p>1：满足判定覆盖就一定满足语句覆盖，反之则不然。</p>
+<p>2：满足条件覆盖不一定满足判定覆盖和语句覆盖。</p>
+<p>3：满足判定/条件覆盖就一定满足条件覆盖和语句覆盖和判断覆盖</p>
+<p>4：满足条件组合覆盖就一定满足条件覆盖和判定覆盖</p>
+<p>5：满足路径覆盖不一定满足条件覆盖，但一定满足判定覆盖</p>
+<h4 id="4、6中覆盖方法的测试用例表要会画"><a href="#4、6中覆盖方法的测试用例表要会画" class="headerlink" title="4、6中覆盖方法的测试用例表要会画"></a>4、6中覆盖方法的测试用例表要会画</h4><h4 id="5、要会画流程控制图（重点内容）"><a href="#5、要会画流程控制图（重点内容）" class="headerlink" title="5、要会画流程控制图（重点内容）"></a>5、要会画流程控制图（重点内容）</h4><h4 id="6、记住软件测试人员需要具备的素质（重点内容必须记住）"><a href="#6、记住软件测试人员需要具备的素质（重点内容必须记住）" class="headerlink" title="6、记住软件测试人员需要具备的素质（重点内容必须记住）"></a>6、记住软件测试人员需要具备的素质（重点内容必须记住）</h4><p>良好的沟通能力，掌握比较全面的技术，充分的自信心、足够耐心和责任心，要具备怀疑精神和学习能力，超强的记忆力和良好的洞察力。</p>
+<h4 id="7、了解云计算与软件测试内容"><a href="#7、了解云计算与软件测试内容" class="headerlink" title="7、了解云计算与软件测试内容"></a>7、了解云计算与软件测试内容</h4><p>云计算是网络计算、分布计算、并行计算、效用计算、网络存储等传统计算机技术和网络技术发展的产物</p>
+<h4 id="8、软件测试前沿技术有哪些"><a href="#8、软件测试前沿技术有哪些" class="headerlink" title="8、软件测试前沿技术有哪些"></a>8、软件测试前沿技术有哪些</h4><p>1、敏捷测试方法；         2测试驱动开发     </p>
+<h4 id="9、影响软件测试费用的因素"><a href="#9、影响软件测试费用的因素" class="headerlink" title="9、影响软件测试费用的因素"></a>9、影响软件测试费用的因素</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、软件的功能</span><br><span class="line"></span><br><span class="line">2、目标用户的数量</span><br><span class="line"></span><br><span class="line">3、潜在缺陷造成的影响</span><br><span class="line"></span><br><span class="line">4、开发机构的业务能力</span><br><span class="line"></span><br><span class="line">5、测试的时机</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="10、软件测试与开发的完整流程图（重点内容必须会画）"><a href="#10、软件测试与开发的完整流程图（重点内容必须会画）" class="headerlink" title="10、软件测试与开发的完整流程图（重点内容必须会画）"></a>10、软件测试与开发的完整流程图（重点内容必须会画）</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">需求分析						验收测试</span><br><span class="line">	概要设计				系统测试</span><br><span class="line">		详细设计		集成测试</span><br><span class="line">			编码		单元测试</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="11、测试环境的维护与管理"><a href="#11、测试环境的维护与管理" class="headerlink" title="11、测试环境的维护与管理"></a>11、测试环境的维护与管理</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、设置专们的测试环境管理角色</span><br><span class="line">2、明确测试环境管理所需的各种文档</span><br><span class="line">3、测试环境访问权限的管理</span><br><span class="line">4、测试环境的变更管理</span><br><span class="line">5、测试环境的备份和恢复</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="12、软件测试的复杂性"><a href="#12、软件测试的复杂性" class="headerlink" title="12、软件测试的复杂性"></a>12、软件测试的复杂性</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、不可能对程序实现完全测试</span><br><span class="line">2、杀虫剂现象</span><br><span class="line">3、软件测试的代价</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="13、测试用例（重点内容）"><a href="#13、测试用例（重点内容）" class="headerlink" title="13、测试用例（重点内容）"></a>13、测试用例（重点内容）</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">定义：测试用例时为了某个目标而编制的一组测试输入、执行添加以及预期结果，以便测试某个程序路径或核实是否满足某个特定需求。</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="14、软件测试的分类（超重点内容，各种测试的别名都需要记住，按照什么分类，某分类分为哪几种；比如：按照软件测试方式分类，分为静态测试和动态测试两类）"><a href="#14、软件测试的分类（超重点内容，各种测试的别名都需要记住，按照什么分类，某分类分为哪几种；比如：按照软件测试方式分类，分为静态测试和动态测试两类）" class="headerlink" title="14、软件测试的分类（超重点内容，各种测试的别名都需要记住，按照什么分类，某分类分为哪几种；比如：按照软件测试方式分类，分为静态测试和动态测试两类）"></a>14、软件测试的分类（超重点内容，各种测试的别名都需要记住，按照什么分类，某分类分为哪几种；比如：按照软件测试方式分类，分为静态测试和动态测试两类）</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">按照测试内容分类：</span><br><span class="line">	1、功能性测试</span><br><span class="line">	2、可靠性测试</span><br><span class="line">	3、易用性测试</span><br><span class="line">	4、效率测试</span><br><span class="line">	5、可移植性测试</span><br><span class="line">	6、文档测试</span><br><span class="line">	</span><br><span class="line">按照生命周期分类：</span><br><span class="line">	1、单元测试(模块测试)</span><br><span class="line">	2、集成测试(组装测试)</span><br><span class="line">	3、确认测试(有效性测试)</span><br><span class="line">	4、系统测试</span><br><span class="line">	5、验收测试</span><br><span class="line">	</span><br><span class="line">按照测试方式分类：</span><br><span class="line">	1、静态测试</span><br><span class="line">	2、动态测试</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="15、软件测试过程模型（主要记有哪几个以及区分软件开发过程模型和软件测试过程模型）"><a href="#15、软件测试过程模型（主要记有哪几个以及区分软件开发过程模型和软件测试过程模型）" class="headerlink" title="15、软件测试过程模型（主要记有哪几个以及区分软件开发过程模型和软件测试过程模型）"></a>15、软件测试过程模型（主要记有哪几个以及区分软件开发过程模型和软件测试过程模型）</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1、V模型</span><br><span class="line">2、W模型</span><br><span class="line">3、X模型</span><br><span class="line">4、H模型</span><br><span class="line">5、前置模型</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="16、软件、软件工程、软件质量、软件测试的定义（着重记住软件测试定义）"><a href="#16、软件、软件工程、软件质量、软件测试的定义（着重记住软件测试定义）" class="headerlink" title="16、软件、软件工程、软件质量、软件测试的定义（着重记住软件测试定义）"></a>16、软件、软件工程、软件质量、软件测试的定义（着重记住软件测试定义）</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">软件测试的定义：测试是为发现错误而执行程序的过程</span><br><span class="line">软件的定义：是计算机系统中与硬件相依存的另一个部分，它是程序、数据及其相关的完整集合</span><br><span class="line">软件工程的定义：应用计算机科学、数学以及管理学科等原理开发软件的工程</span><br><span class="line">软件质量的定义：软件与明确的和隐含的定义的需求相一致的程度</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="17、独立路径测试例题（超重点，三个步骤一定要会，流程图，控制流图，环形复杂度，独立路径集合，测试用例表）"><a href="#17、独立路径测试例题（超重点，三个步骤一定要会，流程图，控制流图，环形复杂度，独立路径集合，测试用例表）" class="headerlink" title="17、独立路径测试例题（超重点，三个步骤一定要会，流程图，控制流图，环形复杂度，独立路径集合，测试用例表）"></a>17、独立路径测试例题（超重点，三个步骤一定要会，流程图，控制流图，环形复杂度，独立路径集合，测试用例表）</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">三个步骤：</span><br><span class="line">	1、导出程序控制流图</span><br><span class="line">	2、求出程序环形复杂度</span><br><span class="line">	3、设计测试用例</span><br><span class="line">	</span><br><span class="line">求环形复杂度的公示：</span><br><span class="line">	1、V(G)&#x3D;E-N+2(E是边的数目；N是结点数目)</span><br><span class="line">	2、V(G)&#x3D;P+1(P是判定结点的数目)</span><br><span class="line">	3、V(G)&#x3D;A(A是区域的数目)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="G:%5Cvue.cli%5CButterfly%5Csource_posts%5C15.2%E7%8B%AC%E7%AB%8B%E8%B7%AF%E5%BE%84%E6%B5%8B%E8%AF%95%E4%BE%8B%E9%A2%98.png" alt="15.2独立路径测试例题"></p>
+]]></content>
+  </entry>
 </search>
